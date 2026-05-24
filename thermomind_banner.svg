@@ -1,0 +1,164 @@
+<svg viewBox="0 0 960 200" width="960" height="200" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>thermomind continuity — persistent surplus · drift · stability · identity</title>
+  <desc>PermaMind ERA 01 banner for thermomind-continuity SDK</desc>
+
+  <defs>
+    <style>
+      .title-gold {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 44px;
+        font-weight: 700;
+        fill: #c9a84c;
+        letter-spacing: 5px;
+      }
+      .title-white {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 44px;
+        font-weight: 400;
+        fill: #dddbd5;
+        letter-spacing: 5px;
+      }
+      .subtitle {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 10px;
+        fill: #5a5870;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+      }
+      .tag {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 9px;
+        letter-spacing: 3px;
+      }
+      .scan {
+        animation: scan 4s linear infinite;
+      }
+      .pdot {
+        animation: pdot 2s ease-in-out infinite;
+      }
+      .glow {
+        animation: glow 3s ease-in-out infinite;
+      }
+      .pfloat {
+        animation: pfloat 3s ease-in-out infinite;
+      }
+      @keyframes scan {
+        0%   { transform: translateX(-140px); opacity: 0; }
+        8%   { opacity: 1; }
+        92%  { opacity: 1; }
+        100% { transform: translateX(1100px); opacity: 0; }
+      }
+      @keyframes pdot {
+        0%, 100% { opacity: 0.3; r: 2.5; }
+        50%       { opacity: 1;   r: 4; }
+      }
+      @keyframes glow {
+        0%, 100% { opacity: 0.85; }
+        50%       { opacity: 1; filter: drop-shadow(0 0 14px #c9a84c99); }
+      }
+      @keyframes pfloat {
+        0%, 100% { transform: translateY(0px);  opacity: 0.3; }
+        50%       { transform: translateY(-7px); opacity: 0.8; }
+      }
+    </style>
+
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#08070f"/>
+      <stop offset="50%"  stop-color="#090a14"/>
+      <stop offset="100%" stop-color="#08070f"/>
+    </linearGradient>
+
+    <linearGradient id="scanGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#c9a84c" stop-opacity="0"/>
+      <stop offset="35%"  stop-color="#c9a84c" stop-opacity="0.7"/>
+      <stop offset="50%"  stop-color="#fff8e0"  stop-opacity="1"/>
+      <stop offset="65%"  stop-color="#c9a84c" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="edgeFade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#c9a84c" stop-opacity="0"/>
+      <stop offset="15%"  stop-color="#c9a84c" stop-opacity="0.4"/>
+      <stop offset="85%"  stop-color="#c9a84c" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="divGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#c9a84c" stop-opacity="0"/>
+      <stop offset="50%"  stop-color="#c9a84c" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="200" fill="url(#bgGrad)"/>
+
+  <!-- Particle field (purple) -->
+  <circle cx="55"  cy="52"  r="1.5" fill="#7c6fd4" class="pfloat" style="animation-delay:0s"/>
+  <circle cx="108" cy="155" r="1.2" fill="#7c6fd4" class="pfloat" style="animation-delay:0.6s"/>
+  <circle cx="890" cy="60"  r="1.5" fill="#7c6fd4" class="pfloat" style="animation-delay:1.1s"/>
+  <circle cx="840" cy="152" r="1.2" fill="#7c6fd4" class="pfloat" style="animation-delay:0.3s"/>
+  <circle cx="480" cy="175" r="1.0" fill="#7c6fd4" class="pfloat" style="animation-delay:1.8s"/>
+  <circle cx="320" cy="38"  r="1.2" fill="#7c6fd4" class="pfloat" style="animation-delay:0.9s"/>
+  <circle cx="650" cy="35"  r="1.0" fill="#7c6fd4" class="pfloat" style="animation-delay:1.4s"/>
+
+  <!-- Particle field (gold) -->
+  <circle cx="28"  cy="100" r="1.5" fill="#c9a84c" class="pfloat" style="animation-delay:0.2s"/>
+  <circle cx="932" cy="100" r="1.5" fill="#c9a84c" class="pfloat" style="animation-delay:1.2s"/>
+  <circle cx="200" cy="28"  r="1.8" fill="#c9a84c" class="pfloat" style="animation-delay:2.0s"/>
+  <circle cx="760" cy="28"  r="1.8" fill="#c9a84c" class="pfloat" style="animation-delay:0.5s"/>
+  <circle cx="480" cy="22"  r="1.2" fill="#c9a84c" class="pfloat" style="animation-delay:1.6s"/>
+
+  <!-- Top + bottom edge lines -->
+  <line x1="0" y1="14" x2="960" y2="14" stroke="url(#edgeFade)" stroke-width="0.8"/>
+  <line x1="0" y1="186" x2="960" y2="186" stroke="url(#edgeFade)" stroke-width="0.8"/>
+
+  <!-- Corner TL -->
+  <line x1="14" y1="14" x2="56" y2="14" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+  <line x1="14" y1="14" x2="14" y2="56" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+  <circle cx="14" cy="14" r="2.5" fill="#c9a84c" class="pdot" style="animation-delay:0s"/>
+
+  <!-- Corner TR -->
+  <line x1="946" y1="14" x2="904" y2="14" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+  <line x1="946" y1="14" x2="946" y2="56" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+  <circle cx="946" cy="14" r="2.5" fill="#c9a84c" class="pdot" style="animation-delay:0.5s"/>
+
+  <!-- Corner BL -->
+  <line x1="14" y1="186" x2="56" y2="186" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+  <line x1="14" y1="186" x2="14" y2="144" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+  <circle cx="14" cy="186" r="2.5" fill="#c9a84c" class="pdot" style="animation-delay:1s"/>
+
+  <!-- Corner BR -->
+  <line x1="946" y1="186" x2="904" y2="186" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+  <line x1="946" y1="186" x2="946" y2="144" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+  <circle cx="946" cy="186" r="2.5" fill="#c9a84c" class="pdot" style="animation-delay:1.5s"/>
+
+  <!-- Tags -->
+  <text x="34" y="30" class="tag" fill="#c9a84c" opacity="0.55">PSSU</text>
+  <text x="926" y="30" class="tag" fill="#7c6fd4" opacity="0.55" text-anchor="end">ERA 01</text>
+  <text x="34" y="178" class="tag" fill="#c9a84c" opacity="0.35">gap · retention · identity</text>
+  <text x="926" y="178" class="tag" fill="#7c6fd4" opacity="0.35" text-anchor="end">bapxai.com</text>
+
+  <!-- Scan line -->
+  <line class="scan" x1="0" y1="100" x2="140" y2="100"
+        stroke="url(#scanGrad)" stroke-width="1.2"/>
+
+  <!-- Side accent lines -->
+  <line x1="56" y1="100" x2="218" y2="100" stroke="#c9a84c" stroke-width="0.5" opacity="0.12"/>
+  <line x1="742" y1="100" x2="904" y2="100" stroke="#c9a84c" stroke-width="0.5" opacity="0.12"/>
+  <circle cx="218" cy="100" r="2" fill="#c9a84c" opacity="0.2"/>
+  <circle cx="742" cy="100" r="2" fill="#c9a84c" opacity="0.2"/>
+
+  <!-- Title -->
+  <text x="480" y="90" text-anchor="middle" class="title-gold glow">thermomind</text>
+  <text x="480" y="138" text-anchor="middle" class="title-white">continuity</text>
+
+  <!-- Divider -->
+  <line x1="240" y1="150" x2="720" y2="150" stroke="url(#divGrad)" stroke-width="0.8"/>
+  <circle cx="480" cy="150" r="2" fill="#c9a84c" opacity="0.4"/>
+
+  <!-- Subtitle -->
+  <text x="480" y="168" text-anchor="middle" class="subtitle">
+    persistent surplus · drift · stability · identity
+  </text>
+</svg>
