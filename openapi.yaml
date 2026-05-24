@@ -1,1 +1,336 @@
+openapi: 3.1.0
+info:
+  title: ThermoMind Continuity Layer API
+  version: 1.0.0
+  description: >
+    A model-agnostic continuity engine providing surplus, drift, stability,
+    identity fingerprinting, and long-term memory for LLM agents.
+
+servers:
+  - url: https://api.thermomind.ai/v1
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Session:
+      type: object
+      properties:
+        session_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
+    Event:
+      type: object
+      required: [type, content, role]
+      properties:
+        type:
+          type: string
+        content:
+          type: string
+        role:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        tags:
+          type: array
+          items:
+            type: string
+
+    CycleUpdate:
+      type: object
+      properties:
+        cycle_id:
+          type: string
+        surplus:
+          type: number
+        drift:
+          type: number
+        stability:
+          type: number
+        state_version:
+          type: integer
+
+    State:
+      type: object
+      properties:
+        session_id:
+          type: string
+        surplus:
+          type: number
+        drift:
+          type: number
+        stability:
+          type: number
+        identity_fingerprint:
+          type: string
+        last_cycle_id:
+          type: string
+        cycles:
+          type: integer
+        uptime_seconds:
+          type: integer
+
+    MemoryWrite:
+      type: object
+      required: [kind, content]
+      properties:
+        kind:
+          type: string
+        content:
+          type: string
+        importance:
+          type: number
+        source_cycle_id:
+          type: string
+
+    MemoryItem:
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        relevance:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+
+    GuidanceRequest:
+      type: object
+      properties:
+        context:
+          type: string
+        max_hints:
+          type: integer
+
+    GuidanceResponse:
+      type: object
+      properties:
+        surplus:
+          type: number
+        drift:
+          type: number
+        stability:
+          type: number
+        hints:
+          type: array
+          items:
+            type: string
+
+    TimelinePoint:
+      type: object
+      properties:
+        cycle_id:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        surplus:
+          type: number
+        drift:
+          type: number
+        stability:
+          type: number
+
+security:
+  - ApiKeyAuth: []
+
+paths:
+
+  /sessions:
+    post:
+      summary: Create a new continuity session
+      operationId: createSession
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                external_id:
+                  type: string
+                metadata:
+                  type: object
+      responses:
+        '200':
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+
+  /sessions/{session_id}/events:
+    post:
+      summary: Append an event and trigger a continuity cycle update
+      operationId: appendEvent
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '200':
+          description: Cycle updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CycleUpdate'
+
+  /sessions/{session_id}/state:
+    get:
+      summary: Get continuity metrics for the session
+      operationId: getState
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Current continuity state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/State'
+
+  /sessions/{session_id}/memory:
+    post:
+      summary: Write a memory item
+      operationId: writeMemory
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemoryWrite'
+      responses:
+        '200':
+          description: Memory stored
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  memory_id:
+                    type: string
+                  status:
+                    type: string
+
+    get:
+      summary: Query memory items
+      operationId: queryMemory
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: query
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Memory items
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MemoryItem'
+
+  /sessions/{session_id}/guidance:
+    post:
+      summary: Generate continuity-aware guidance for LLM prompting
+      operationId: getGuidance
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuidanceRequest'
+      responses:
+        '200':
+          description: Guidance generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuidanceResponse'
+
+  /sessions/{session_id}/timeline:
+    get:
+      summary: Retrieve historical continuity metrics
+      operationId: getTimeline
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Timeline points
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  points:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TimelinePoint'
 
