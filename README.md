@@ -1,5 +1,9 @@
 <div align="center">
 
+![thermomind-continuity](./thermomind_banner.svg)
+
+<br/>
+
 <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=20&duration=1800&pause=500&color=D4AF37&center=true&vCenter=true&multiline=false&repeat=true&width=960&height=42&lines=thermomind-continuity;Add+surplus%2C+drift%2C+stability+to+any+LLM+agent.;LLMs+reset.+Continuity+doesn%27t.;Drop-in+SDK+for+any+agent+framework.;npm+install+thermomind-continuity;pip+install+thermomind-continuity;The+missing+layer+between+token+and+agent." alt="Typing SVG"/>
 
 <br/><br/>
@@ -304,5 +308,9 @@ If you publish research using this SDK, please cite:
 <a href="https://buymeacoffee.com/permamind"><img src="https://img.shields.io/badge/Support_PermaMind_Research-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black&labelColor=0d0d0d"/></a>
 
 </div>
+
+
+
+
 
 
