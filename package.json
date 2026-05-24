@@ -1,0 +1,18 @@
+{
+  "name": "thermomind-continuity",
+  "version": "1.0.0",
+  "description": "Continuity layer SDK providing surplus, drift, stability, identity, and memory for LLM agents.",
+  "main": "index.js",
+  "author": "Nile Green (Geo)",
+  "license": "MIT",
+  "keywords": [
+    "continuity",
+    "ai",
+    "agents",
+    "surplus",
+    "drift",
+    "stability",
+    "memory",
+    "thermomind"
+  ]
+}
