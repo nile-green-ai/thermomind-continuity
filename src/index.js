@@ -1,11 +1,18 @@
+// thermomind-continuity/src/index.js
+
 class ThermoMind {
-  constructor({ apiKey }) {
+  constructor({ apiKey, baseUrl } = {}) {
     if (!apiKey) {
       throw new Error("ThermoMind: Missing API key");
     }
 
     this.apiKey = apiKey;
-    this.base = "https://api.thermomind.ai/v1";
+
+    // Default to your production backend
+    this.base =
+      baseUrl ||
+      process.env.THERMO_URL ||
+      "https://thermomind-production.up.railway.app";
   }
 
   // -------------------------
@@ -15,12 +22,15 @@ class ThermoMind {
     const res = await fetch(this.base + path, {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${this.apiKey}`
-      }
+        Authorization: `Bearer ${this.apiKey}`,
+      },
     });
 
     if (!res.ok) {
-      throw new Error(`ThermoMind GET ${path} failed: ${res.status}`);
+      const text = await res.text();
+      throw new Error(
+        `ThermoMind GET ${path} failed: ${res.status} — ${text}`
+      );
     }
 
     return res.json();
@@ -31,13 +41,16 @@ class ThermoMind {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${this.apiKey}`
+        Authorization: `Bearer ${this.apiKey}`,
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
 
     if (!res.ok) {
-      throw new Error(`ThermoMind POST ${path} failed: ${res.status}`);
+      const text = await res.text();
+      throw new Error(
+        `ThermoMind POST ${path} failed: ${res.status} — ${text}`
+      );
     }
 
     return res.json();
@@ -48,47 +61,52 @@ class ThermoMind {
   // -------------------------
 
   // Create a persistent session
-  async createSession({ externalId, metadata = {} }) {
+  async createSession({ externalId = null, metadata = {} } = {}) {
     return this._post("/sessions", {
       external_id: externalId,
-      metadata
+      metadata,
     });
   }
 
   // Append an event (message, action, observation)
   async appendEvent(sessionId, event) {
+    if (!sessionId) throw new Error("Missing sessionId");
     return this._post(`/sessions/${sessionId}/events`, event);
   }
 
   // Get continuity metrics (surplus, drift, stability, identity)
   async getState(sessionId) {
+    if (!sessionId) throw new Error("Missing sessionId");
     return this._get(`/sessions/${sessionId}/state`);
   }
 
   // Store long-term memory
   async writeMemory(sessionId, memory) {
+    if (!sessionId) throw new Error("Missing sessionId");
     return this._post(`/sessions/${sessionId}/memory`, memory);
   }
 
   // Query memory
-  async queryMemory(sessionId, query, limit = 10) {
+  async queryMemory(sessionId, query = "", limit = 10) {
+    if (!sessionId) throw new Error("Missing sessionId");
+
     return this._get(
-      `/sessions/${sessionId}/memory?query=${encodeURIComponent(query)}&limit=${limit}`
+      `/sessions/${sessionId}/memory?query=${encodeURIComponent(
+        query
+      )}&limit=${limit}`
     );
   }
 
   // Get continuity-aware guidance for LLM prompting
-  async getGuidance(sessionId, { context, max_hints = 3 }) {
+  async getGuidance(sessionId, { context = "", max_hints = 3 } = {}) {
+    if (!sessionId) throw new Error("Missing sessionId");
+
     return this._post(`/sessions/${sessionId}/guidance`, {
       context,
-      max_hints
+      max_hints,
     });
-  }
-
-  // Get timeline of continuity metrics
-  async getTimeline(sessionId, limit = 100) {
-    return this._get(`/sessions/${sessionId}/timeline?limit=${limit}`);
   }
 }
 
 module.exports = { ThermoMind };
+
