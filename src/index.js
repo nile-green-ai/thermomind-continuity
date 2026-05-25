@@ -8,16 +8,12 @@ class ThermoMind {
 
     this.apiKey = apiKey;
 
-    // Default to your production backend
     this.base =
       baseUrl ||
       process.env.THERMO_URL ||
       "https://thermomind-production.up.railway.app";
   }
 
-  // -------------------------
-  // Internal helpers
-  // -------------------------
   async _get(path) {
     const res = await fetch(this.base + path, {
       method: "GET",
@@ -28,9 +24,7 @@ class ThermoMind {
 
     if (!res.ok) {
       const text = await res.text();
-      throw new Error(
-        `ThermoMind GET ${path} failed: ${res.status} — ${text}`
-      );
+      throw new Error(`ThermoMind GET ${path} failed: ${res.status} — ${text}`);
     }
 
     return res.json();
@@ -48,21 +42,15 @@ class ThermoMind {
 
     if (!res.ok) {
       const text = await res.text();
-      throw new Error(
-        `ThermoMind POST ${path} failed: ${res.status} — ${text}`
-      );
+      throw new Error(`ThermoMind POST ${path} failed: ${res.status} — ${text}`);
     }
 
     return res.json();
   }
 
-  // -------------------------
-  // Public API
-  // -------------------------
-
   // Create a persistent session
   async createSession({ externalId = null, metadata = {} } = {}) {
-    return this._post("/sessions", {
+    return this._post("/v1/sessions", {
       external_id: externalId,
       metadata,
     });
@@ -71,37 +59,33 @@ class ThermoMind {
   // Append an event (message, action, observation)
   async appendEvent(sessionId, event) {
     if (!sessionId) throw new Error("Missing sessionId");
-    return this._post(`/sessions/${sessionId}/events`, event);
+    return this._post(`/v1/sessions/${sessionId}/events`, event);
   }
 
   // Get continuity metrics (surplus, drift, stability, identity)
   async getState(sessionId) {
     if (!sessionId) throw new Error("Missing sessionId");
-    return this._get(`/sessions/${sessionId}/state`);
+    return this._get(`/v1/sessions/${sessionId}/state`);
   }
 
   // Store long-term memory
   async writeMemory(sessionId, memory) {
     if (!sessionId) throw new Error("Missing sessionId");
-    return this._post(`/sessions/${sessionId}/memory`, memory);
+    return this._post(`/v1/sessions/${sessionId}/memory`, memory);
   }
 
   // Query memory
   async queryMemory(sessionId, query = "", limit = 10) {
     if (!sessionId) throw new Error("Missing sessionId");
-
     return this._get(
-      `/sessions/${sessionId}/memory?query=${encodeURIComponent(
-        query
-      )}&limit=${limit}`
+      `/v1/sessions/${sessionId}/memory?query=${encodeURIComponent(query)}&limit=${limit}`
     );
   }
 
   // Get continuity-aware guidance for LLM prompting
   async getGuidance(sessionId, { context = "", max_hints = 3 } = {}) {
     if (!sessionId) throw new Error("Missing sessionId");
-
-    return this._post(`/sessions/${sessionId}/guidance`, {
+    return this._post(`/v1/sessions/${sessionId}/guidance`, {
       context,
       max_hints,
     });
@@ -109,4 +93,3 @@ class ThermoMind {
 }
 
 module.exports = { ThermoMind };
-
