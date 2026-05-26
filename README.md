@@ -22,15 +22,11 @@ Attach it to any LLM. Your agent stops resetting. It starts remembering.
 
 ---
 
-
-```
-
-Your AI forgets everything after every message.
-thermomind-continuity fixes that.
-
-```
-
----
+<div align="center">
+  <br/>
+  <img src="./continuity_core.svg" alt="thermomind core proposition" width="800" max-width="100%"/>
+  <br/><br/>
+</div>
 
 ## ⚡ What It Does
 
