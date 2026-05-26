@@ -5,136 +5,122 @@ class ThermoMind {
     if (!apiKey) {
       throw new Error("ThermoMind: Missing API key");
     }
-
     this.apiKey = apiKey;
-    this.base =
-      baseUrl ||
-      process.env.THERMO_URL ||
-      "https://thermomind-production.up.railway.app";
+    this.base = baseUrl || process.env.THERMO_URL || "https://thermomind-production.up.railway.app";
   }
 
-  async _get(path) {
-    const res = await fetch(this.base + path, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${this.apiKey}`,
-      },
-    });
-
-    if (!res.ok) {
-      const text = await res.text();
-      throw new Error(`ThermoMind GET ${path} failed: ${res.status} — ${text}`);
-    }
-
-    return res.json();
-  }
-
-  async _post(path, body) {
-    const res = await fetch(this.base + path, {
-      method: "POST",
+  async _request(method, path, body = null) {
+    const config = {
+      method,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${this.apiKey}`,
-      },
-      body: JSON.stringify(body),
-    });
+      }
+    };
+    if (body) config.body = JSON.stringify(body);
 
+    const res = await fetch(this.base + path, config);
     if (!res.ok) {
       const text = await res.text();
-      throw new Error(`ThermoMind POST ${path} failed: ${res.status} — ${text}`);
+      throw new Error(`ThermoMind ${method} ${path} failed: ${res.status} — ${text}`);
     }
-
     return res.json();
   }
 
-  // Create a persistent session
+  // Synchronize a stateful session kernel
   async createSession({ externalId = null, metadata = {} } = {}) {
-    return this._post("/v1/sessions", {
+    return this._request("POST", "/v1/sessions", {
       external_id: externalId,
       metadata,
     });
   }
 
-  // Append an event (message, action, observation)
+  // Track an internal cycle update (voidchi / TCI metrics)
   async appendEvent(sessionId, event) {
     if (!sessionId) throw new Error("Missing sessionId");
-    return this._post(`/v1/sessions/${sessionId}/events`, event);
+    return this._request("POST", `/v1/sessions/${sessionId}/events`, {
+      type: event.type,
+      content: event.content,
+      role: event.role,
+      tags: event.tags || []
+    });
   }
 
-  // Get continuity metrics (surplus, drift, stability, identity)
+  // Retrieve continuous state variables (Surplus, Drift, Stability, Identity)
   async getState(sessionId) {
     if (!sessionId) throw new Error("Missing sessionId");
-    return this._get(`/v1/sessions/${sessionId}/state`);
+    return this._request("GET", `/v1/sessions/${sessionId}/state`);
   }
 
-  // Store long-term memory
+  // Store information directly to the bounded BAP memory substrate
   async writeMemory(sessionId, memory) {
     if (!sessionId) throw new Error("Missing sessionId");
-    return this._post(`/v1/sessions/${sessionId}/memory`, memory);
+    return this._request("POST", `/v1/sessions/${sessionId}/memory`, {
+      kind: memory.kind || "fact",
+      content: memory.content,
+      importance: memory.importance || 1.0
+    });
   }
 
-  // Query memory
+  // Query memory clusters
   async queryMemory(sessionId, query = "", limit = 10) {
     if (!sessionId) throw new Error("Missing sessionId");
-    return this._get(
-      `/v1/sessions/${sessionId}/memory?query=${encodeURIComponent(query)}&limit=${limit}`
-    );
+    return this._request("GET", `/v1/sessions/${sessionId}/memory?query=${encodeURIComponent(query)}&limit=${limit}`);
   }
 
-  // Get continuity-aware guidance for LLM prompting
+  // Generate continuity guidance and system hints from the stateful kernel
   async getGuidance(sessionId, { context = "", max_hints = 3 } = {}) {
     if (!sessionId) throw new Error("Missing sessionId");
-    return this._post(`/v1/sessions/${sessionId}/guidance`, {
+    return this._request("POST", `/v1/sessions/${sessionId}/guidance`, {
       context,
       max_hints,
     });
   }
 
   /**
-   * THE GAME GENIE INTERCEPTOR
-   * Wraps an OpenAI client instance so memory injections happen seamlessly.
+   * THE GAME GENIE ENGINE INTERCEPTOR
+   * Connects stateless LLM frames to your stateful computing engine.
    */
   wrapOpenAI(openaiClient) {
     const tmInstance = this;
-    
-    // We intercept the normal openai.chat.completions.create call
     const originalCreate = openaiClient.chat.completions.create.bind(openaiClient.chat.completions);
 
-    openaiClient.chat.completions.create = async function (params) {
-      // Look for a thermoSessionId passed into the request options
-      const sessionId = params.thermoSessionId;
+    openaiClient.chat.completions.create = async function (params, options = {}) {
+      const sessionId = options.thermoSessionId || params.thermoSessionId;
+      
+      // If no continuous session ID is mapped, run standard passthrough mode
       if (!sessionId) {
-        // If they didn't pass a session ID, just run standard stateless OpenAI
-        return originalCreate(params);
+        const { thermoSessionId, ...cleanParams } = params;
+        return originalCreate(cleanParams, options);
       }
 
-      // Extract the newest user message text
+      // Extract current processing context
       const messages = params.messages || [];
       const lastUserMsg = [...messages].reverse().find(m => m.role === 'user');
       const userContent = lastUserMsg ? lastUserMsg.content : "";
 
-      // 1. AUTO-LOG the incoming user message to ThermoMind
+      // 1. Telemetry background cycle update
       if (userContent) {
-        await tmInstance.appendEvent(sessionId, {
-          type: "message_user",
+        tmInstance.appendEvent(sessionId, {
+          type: "cycle_input",
           content: userContent,
           role: "user"
-        });
+        }).catch(err => console.warn("ThermoMind non-blocking telemetry log warning:", err.message));
       }
 
-      // 2. AUTO-FETCH continuity-aware guidance/memories from your engine
+      // 2. Fetch stateful context guidelines from the OS/Engine kernel
       let systemGuidance = "";
       try {
         const guidance = await tmInstance.getGuidance(sessionId, { context: userContent });
-        if (guidance && guidance.hints) {
-          systemGuidance = `\n[ThermoMind Continuity Context]:\n${guidance.hints.join("\n")}`;
+        if (guidance && guidance.hints && guidance.hints.length > 0) {
+          systemGuidance = `\n[ThermoMind Stateful Identity & Continuity Context]:\n${guidance.hints.join("\n")}`;
         }
       } catch (err) {
-        console.warn("ThermoMind non-blocking warning: Failed to fetch guidance", err.message);
+        console.warn("ThermoMind continuity fallback: Operating raw.", err.message);
       }
 
-      // 3. AUTO-INJECT memory context into the system prompt
-      const modifiedMessages = [...messages];
+      // 3. Inject continuous state parameters directly into the prompt frame
+      const modifiedMessages = JSON.parse(JSON.stringify(messages));
       if (systemGuidance) {
         const sysIndex = modifiedMessages.findIndex(m => m.role === 'system');
         if (sysIndex !== -1) {
@@ -144,21 +130,22 @@ class ThermoMind {
         }
       }
 
-      // Strip out our custom parameter so OpenAI doesn't error out
-      const { thermoSessionId, ...cleanParams } = params;
+      // Clean custom params to match standard OpenAI schemas
+      const { thermoSessionId: p_id, ...cleanParams } = params;
+      const { thermoSessionId: o_id, ...cleanOptions } = options;
       cleanParams.messages = modifiedMessages;
 
-      // 4. EXECUTE the regular LLM call with the new "hacked" continuous brain
-      const response = await originalCreate(cleanParams);
+      // 4. Compute LLM step
+      const response = await originalCreate(cleanParams, cleanOptions);
 
-      // 5. AUTO-LOG the assistant's reply back to ThermoMind to keep the loop unbroken
+      // 5. Close loop: Pipe output state back to the continuous engine
       const assistantReply = response.choices?.[0]?.message?.content;
       if (assistantReply) {
-        await tmInstance.appendEvent(sessionId, {
-          type: "message_assistant",
+        tmInstance.appendEvent(sessionId, {
+          type: "cycle_output",
           content: assistantReply,
           role: "assistant"
-        });
+        }).catch(err => console.warn("ThermoMind loop closure warning:", err.message));
       }
 
       return response;
