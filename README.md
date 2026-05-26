@@ -1,6 +1,6 @@
 <div align="center">
 
-![thermomind-continuity](./thermomind_banner_v2.svg)
+![thermomind-continuity](./thermomind_banner-2.svg)
 
 ### A Game Genie for your AI.
 
@@ -22,17 +22,18 @@ Attach it to any LLM. Your agent stops resetting. It starts remembering.
 
 ---
 
-
 ```
-
 Your AI forgets everything after every message.
 thermomind-continuity fixes that.
-
 ```
 
 ---
 
 ## ⚡ What It Does
+
+<div align="center">
+  <img src="./thermomind_continuity_explainer.svg" width="100%" alt="thermomind-continuity — What It Does and How It Works"/>
+</div>
 
 Your LLM resets after every call. No memory. No identity. No sense of who it is or what it's been doing.
 
@@ -44,12 +45,10 @@ You keep your model. You keep your framework. You just plug this in.
 
 ```bash
 npm install thermomind-continuity
-
 ```
 
 ```bash
 pip install thermomind-continuity
-
 ```
 
 ---
@@ -81,7 +80,6 @@ await tm.appendEvent(session.id, { type: "msg", content: "hello", role: "user" }
 const guidance = await tm.getGuidance(session.id);
 console.log(guidance.hints);
 // → { surplus: 0.71, drift: 0.08, stability: 0.84, tone: "stable" }
-
 ```
 
 That's it. Your agent now has a state that persists across every session.
@@ -89,6 +87,10 @@ That's it. Your agent now has a state that persists across every session.
 ---
 
 ## 🛠️ System Architecture
+
+<div align="center">
+  <img src="./continuity_core.svg" width="100%" alt="thermomind-continuity System Architecture"/>
+</div>
 
 ---
 
@@ -129,7 +131,6 @@ Cycle  Surplus  Drift  Stability  Grade  Event
 088    0.72     0.11   0.81       A      identity_stable
 134    0.74     0.09   0.88       A      generativity_onset
 200    0.81     0.07   0.91       A+     long_horizon_stable ← same agent, 200 turns later
-
 ```
 
 Agents that start with identical settings **diverge over time** based on their interaction history.
@@ -162,7 +163,6 @@ const guidance = await tm.getGuidance(session.id, {
 // Inject guidance.hints into your LLM system prompt
 console.log(guidance.hints);
 // → { surplus: 0.71, drift: 0.08, stability: 0.84, tone: "stable", memory_refs: [...] }
-
 ```
 
 **Python**
@@ -183,7 +183,6 @@ tm.append_event(session.id, {
 
 guidance = tm.get_guidance(session.id, context="support: billing")
 print(guidance.hints)
-
 ```
 
 ---
@@ -193,19 +192,17 @@ print(guidance.hints)
 **1. Start a session:**
 
 ```bash
-curl -X POST [https://thermomind-production.up.railway.app/v1/sessions](https://thermomind-production.up.railway.app/v1/sessions) \
+curl -X POST https://thermomind-production.up.railway.app/v1/sessions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer test_public_key" \
   -d '{"externalId": "terminal-agent"}'
-
 ```
 
 **2. Check its state:**
 
 ```bash
-curl -X GET [https://thermomind-production.up.railway.app/v1/sessions/terminal-agent/state](https://thermomind-production.up.railway.app/v1/sessions/terminal-agent/state) \
+curl -X GET https://thermomind-production.up.railway.app/v1/sessions/terminal-agent/state \
   -H "Authorization: Bearer test_public_key"
-
 ```
 
 ---
@@ -220,10 +217,9 @@ POST   /sessions/{id}/memory      →  Store long-term memory
 GET    /sessions/{id}/memory      →  Query memory by relevance
 POST   /sessions/{id}/guidance    →  Get continuity hints for your LLM prompt
 GET    /sessions/{id}/timeline    →  Full state history
-
 ```
 
-Full spec: [`openapi.yaml`](https://www.google.com/search?q=./openapi.yaml)
+Full spec: [`openapi.yaml`](./openapi.yaml)
 
 ---
 
@@ -264,7 +260,6 @@ thermomind-continuity/
     ├── basic_session.ts
     ├── support_agent.ts
     └── research_agent.py
-
 ```
 
 ---
@@ -311,9 +306,8 @@ MIT. Use it. Build on it. Ship it.
   title     = {Thermodynamic Cognition Index (TCI)},
   year      = {2026},
   doi       = {10.5281/zenodo.19263435},
-  url       = {[https://zenodo.org/records/19263435](https://zenodo.org/records/19263435)}
+  url       = {https://zenodo.org/records/19263435}
 }
-
 ```
 
 ---
@@ -328,13 +322,8 @@ MIT. Use it. Build on it. Ship it.
 ║   The missing layer between token and agent.     ║
 ║                                                  ║
 ╚══════════════════════════════════════════════════╝
-
 ```
 
 **Nile Green** · [ORCID](https://orcid.org/0009-0007-3629-6404) · [@BAPxAI](https://twitter.com/BAPxAI) · [bapxai.com](https://bapxai.com)
 
 ⭐ Star the repo. Try the API. Build an agent that remembers.
-
-```
-
-```
