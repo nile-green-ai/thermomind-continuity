@@ -1,4 +1,3 @@
-```markdown
 <div align="center">
 
 ![thermomind-continuity](./thermomind_banner_v2.svg)
