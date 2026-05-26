@@ -1,3 +1,4 @@
+```markdown
 <div align="center">
 
 ![thermomind-continuity](./thermomind_banner_v2.svg)
@@ -88,6 +89,10 @@ That's it. Your agent now has a state that persists across every session.
 
 ---
 
+## 🛠️ System Architecture
+
+---
+
 ## What It Tracks
 
 | Metric | What It Does |
@@ -136,7 +141,7 @@ That divergence isn't a bug. That's the whole point.
 
 ## 🚀 Full Quickstart
 
-**JavaScript**
+**JavaScript / TypeScript**
 
 ```ts
 import { ThermoMind } from "thermomind-continuity";
