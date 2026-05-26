@@ -7,7 +7,6 @@ class ThermoMind {
     }
 
     this.apiKey = apiKey;
-
     this.base =
       baseUrl ||
       process.env.THERMO_URL ||
@@ -89,6 +88,83 @@ class ThermoMind {
       context,
       max_hints,
     });
+  }
+
+  /**
+   * THE GAME GENIE INTERCEPTOR
+   * Wraps an OpenAI client instance so memory injections happen seamlessly.
+   */
+  wrapOpenAI(openaiClient) {
+    const tmInstance = this;
+    
+    // We intercept the normal openai.chat.completions.create call
+    const originalCreate = openaiClient.chat.completions.create.bind(openaiClient.chat.completions);
+
+    openaiClient.chat.completions.create = async function (params) {
+      // Look for a thermoSessionId passed into the request options
+      const sessionId = params.thermoSessionId;
+      if (!sessionId) {
+        // If they didn't pass a session ID, just run standard stateless OpenAI
+        return originalCreate(params);
+      }
+
+      // Extract the newest user message text
+      const messages = params.messages || [];
+      const lastUserMsg = [...messages].reverse().find(m => m.role === 'user');
+      const userContent = lastUserMsg ? lastUserMsg.content : "";
+
+      // 1. AUTO-LOG the incoming user message to ThermoMind
+      if (userContent) {
+        await tmInstance.appendEvent(sessionId, {
+          type: "message_user",
+          content: userContent,
+          role: "user"
+        });
+      }
+
+      // 2. AUTO-FETCH continuity-aware guidance/memories from your engine
+      let systemGuidance = "";
+      try {
+        const guidance = await tmInstance.getGuidance(sessionId, { context: userContent });
+        if (guidance && guidance.hints) {
+          systemGuidance = `\n[ThermoMind Continuity Context]:\n${guidance.hints.join("\n")}`;
+        }
+      } catch (err) {
+        console.warn("ThermoMind non-blocking warning: Failed to fetch guidance", err.message);
+      }
+
+      // 3. AUTO-INJECT memory context into the system prompt
+      const modifiedMessages = [...messages];
+      if (systemGuidance) {
+        const sysIndex = modifiedMessages.findIndex(m => m.role === 'system');
+        if (sysIndex !== -1) {
+          modifiedMessages[sysIndex].content += systemGuidance;
+        } else {
+          modifiedMessages.unshift({ role: 'system', content: systemGuidance });
+        }
+      }
+
+      // Strip out our custom parameter so OpenAI doesn't error out
+      const { thermoSessionId, ...cleanParams } = params;
+      cleanParams.messages = modifiedMessages;
+
+      // 4. EXECUTE the regular LLM call with the new "hacked" continuous brain
+      const response = await originalCreate(cleanParams);
+
+      // 5. AUTO-LOG the assistant's reply back to ThermoMind to keep the loop unbroken
+      const assistantReply = response.choices?.[0]?.message?.content;
+      if (assistantReply) {
+        await tmInstance.appendEvent(sessionId, {
+          type: "message_assistant",
+          content: assistantReply,
+          role: "assistant"
+        });
+      }
+
+      return response;
+    };
+
+    return openaiClient;
   }
 }
 
