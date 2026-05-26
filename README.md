@@ -1,8 +1,3 @@
-Here is the complete, updated `README.md`.
-
-The core structure, ASCII boxes, code samples, and production metrics remain completely intact. The banner path has been updated to point directly to the new visual asset, maintaining a clean layout.
-
-```markdown
 <div align="center">
 
 ![thermomind-continuity](./thermomind_banner_v2.svg)
