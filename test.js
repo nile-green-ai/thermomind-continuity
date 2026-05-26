@@ -12,14 +12,16 @@ const { ThermoMind } = require("./src/index.js");
   const id = session.session_id;
 
   console.log("Appending event...");
-  await tm.appendEvent(id, { type: "message", text: "Hello ThermoMind" });
+  // Fixed schema payload alignment
+  await tm.appendEvent(id, { type: "message", content: "Hello ThermoMind", role: "user" });
 
   console.log("Getting state...");
   const state = await tm.getState(id);
   console.log("State:", state);
 
   console.log("Writing memory...");
-  await tm.writeMemory(id, { fact: "Geo likes physics" });
+  // Fixed schema payload alignment
+  await tm.writeMemory(id, { kind: "fact", content: "Geo likes physics" });
 
   console.log("Querying memory...");
   const mem = await tm.queryMemory(id, "Geo");
