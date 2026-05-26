@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 130" width="100%" height="100%">
+  <style>
+    .bg { fill: #0d0d0d; stroke: #262626; stroke-width: 1.5; rx: 6px; }
+    .bracket { fill: #D4AF37; }
+    .text-main { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 17px; fill: #e5e5e5; font-weight: 500; letter-spacing: -0.3px; }
+    .text-highlight { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 17px; fill: #D4AF37; font-weight: 700; }
+    
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #f6f8fa; stroke: #d0d7de; }
+      .text-main { fill: #24292f; }
+      .text-highlight { fill: #9a6700; }
+      .bracket { fill: #9a6700; }
+    }
+  </style>
+
+  <rect class="bg" width="798" height="128" x="1" y="1" />
+
+  <path class="bracket" d="M 25,35 L 15,35 L 15,95 L 25,95 L 25,91 L 19,91 L 19,39 L 25,39 Z" />
+  
+  <text x="45" y="54" class="text-main">Your AI forgets everything after <tspan class="text-highlight">every single message.</tspan></text>
+  <text x="45" y="86" class="text-highlight">thermomind-continuity <tspan class="text-main">fixes that baseline.</tspan></text>
+
+  <path class="bracket" d="M 775,35 L 785,35 L 785,95 L 775,95 L 775,91 L 781,91 L 781,39 L 775,39 Z" />
+</svg>
