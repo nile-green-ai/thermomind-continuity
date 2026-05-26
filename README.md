@@ -1,6 +1,6 @@
 <div align="center">
 
-![thermomind-continuity](./thermomind_banner.svg)
+![thermomind-continuity](./thermomind_banner-2.svg)
 
 ### A Game Genie for your AI.
 
