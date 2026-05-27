@@ -1,9 +1,15 @@
+require("dotenv").config();
 const { ThermoMind } = require("./src/index.js");
 
 (async () => {
-  const tm = new ThermoMind({
-    apiKey: "213c13968af87121d1cbaf20d7be7241811f8916b0f59f48cc63b92623b6574d"
-  });
+  // Secured: Pulls token from environment variables instead of hardcoding
+  const apiKey = process.env.TM_KEY || "YOUR_ENV_TM_KEY";
+  
+  if (apiKey === "YOUR_ENV_TM_KEY") {
+    console.warn("Warning: Using placeholder key. Please ensure TM_KEY is set in your environment.");
+  }
+
+  const tm = new ThermoMind({ apiKey });
 
   console.log("Creating session...");
   const session = await tm.createSession({ externalId: "geo-test" });
@@ -12,7 +18,6 @@ const { ThermoMind } = require("./src/index.js");
   const id = session.session_id;
 
   console.log("Appending event...");
-  // Fixed schema payload alignment
   await tm.appendEvent(id, { type: "message", content: "Hello ThermoMind", role: "user" });
 
   console.log("Getting state...");
@@ -20,7 +25,6 @@ const { ThermoMind } = require("./src/index.js");
   console.log("State:", state);
 
   console.log("Writing memory...");
-  // Fixed schema payload alignment
   await tm.writeMemory(id, { kind: "fact", content: "Geo likes physics" });
 
   console.log("Querying memory...");
