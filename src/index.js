@@ -6,7 +6,10 @@ class ThermoMind {
       throw new Error("ThermoMind: Missing API key");
     }
     this.apiKey = apiKey;
-    this.base = baseUrl || process.env.THERMO_URL || "https://thermomind-production.up.railway.app";
+    
+    // Default to your live Railway deployment, removing any trailing slash if provided
+    const rawBase = baseUrl || process.env.THERMO_URL || "https://thermomind-production.up.railway.app";
+    this.base = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
   }
 
   async _request(method, path, body = null) {
@@ -99,7 +102,7 @@ class ThermoMind {
       const lastUserMsg = [...messages].reverse().find(m => m.role === 'user');
       const userContent = lastUserMsg ? lastUserMsg.content : "";
 
-      // 1. Telemetry background cycle update
+      // 1. Telemetry background cycle update (non-blocking)
       if (userContent) {
         tmInstance.appendEvent(sessionId, {
           type: "cycle_input",
@@ -119,8 +122,8 @@ class ThermoMind {
         console.warn("ThermoMind continuity fallback: Operating raw.", err.message);
       }
 
-      // 3. Inject continuous state parameters directly into the prompt frame
-      const modifiedMessages = JSON.parse(JSON.stringify(messages));
+      // 3. Inject continuous state parameters using a safe structural clone alternative
+      const modifiedMessages = messages.map(msg => ({ ...msg }));
       if (systemGuidance) {
         const sysIndex = modifiedMessages.findIndex(m => m.role === 'system');
         if (sysIndex !== -1) {
@@ -155,4 +158,4 @@ class ThermoMind {
   }
 }
 
-module.exports = { ThermoMind };
+module.exports = { ThermoMind };;
