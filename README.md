@@ -312,7 +312,6 @@ MIT. Use it. Build on it. Ship it.
 
 ```
 
-This is clean, visually sharp, and completely matches your actual operational routing paths. You are totally set to push this live.
 
 ```
 
