@@ -7,7 +7,7 @@ info:
     identity fingerprinting, and long-term memory for LLM agents.
 
 servers:
-  - url: https://api.thermomind.ai/v1
+  - url: https://thermomind-production.up.railway.app
 
 components:
   securitySchemes:
@@ -146,7 +146,7 @@ security:
 
 paths:
 
-  /sessions:
+  /v1/sessions:
     post:
       summary: Create a new continuity session
       operationId: createSession
@@ -171,7 +171,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Session'
 
-  /sessions/{session_id}/events:
+  /v1/sessions/{session_id}/events:
     post:
       summary: Append an event and trigger a continuity cycle update
       operationId: appendEvent
@@ -197,7 +197,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CycleUpdate'
 
-  /sessions/{session_id}/state:
+  /v1/sessions/{session_id}/state:
     get:
       summary: Get continuity metrics for the session
       operationId: getState
@@ -217,7 +217,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/State'
 
-  /sessions/{session_id}/memory:
+  /v1/sessions/{session_id}/memory:
     post:
       summary: Write a memory item
       operationId: writeMemory
@@ -280,7 +280,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/MemoryItem'
 
-  /sessions/{session_id}/guidance:
+  /v1/sessions/{session_id}/guidance:
     post:
       summary: Generate continuity-aware guidance for LLM prompting
       operationId: getGuidance
@@ -305,7 +305,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GuidanceResponse'
 
-  /sessions/{session_id}/timeline:
+  /v1/sessions/{session_id}/timeline:
     get:
       summary: Retrieve historical continuity metrics
       operationId: getTimeline
@@ -333,4 +333,3 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/TimelinePoint'
-
