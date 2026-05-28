@@ -13,6 +13,7 @@ class ThermoMind {
   }
 
   async _request(method, path, body = null) {
+    // Ensure the key passes through exactly as generated (including its prefix)
     const config = {
       method,
       headers: {
@@ -158,4 +159,4 @@ class ThermoMind {
   }
 }
 
-module.exports = { ThermoMind };;
+module.exports = { ThermoMind };
