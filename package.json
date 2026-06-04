@@ -1,6 +1,6 @@
 {
   "name": "thermomind-continuity",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Game Genie for LLMs. A plug-and-play continuity layer SDK providing persistent identity, stateful memory tracking, and real-time guidance for stateless AI agents.",
   "main": "src/index.js",
   "scripts": {
