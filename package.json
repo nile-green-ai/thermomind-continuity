@@ -1,18 +1,28 @@
 {
   "name": "thermomind-continuity",
   "version": "1.0.0",
-  "description": "Continuity layer SDK providing surplus, drift, stability, identity, and memory for LLM agents.",
-  "main": "index.js",
+  "description": "The Game Genie for LLMs. A plug-and-play continuity layer SDK providing persistent identity, stateful memory tracking, and real-time guidance for stateless AI agents.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test.js",
+    "demo": "node examples/basic.js"
+  },
   "author": "Nile Green (Geo)",
   "license": "MIT",
   "keywords": [
     "continuity",
     "ai",
     "agents",
-    "surplus",
-    "drift",
-    "stability",
+    "stateful-ai",
     "memory",
-    "thermomind"
-  ]
+    "thermomind",
+    "openai-wrapper"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "openai": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
