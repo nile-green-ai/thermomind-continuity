@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./thermomind_banner-2-2.svg" width="100%" alt="ThermoMind Continuity"/>
+<img src="./thermomind_banner-3.svg" width="100%" alt="ThermoMind Continuity"/>
 
 <br/>
 
@@ -94,6 +94,8 @@ A Game Genie doesn't replace your game cartridge. It supercharges it.
 * ThermoMind = one continuous mind, always on 🔥
 
 Works with **any model**. GPT. Claude. DeepSeek. Llama. Anything.
+
+<img src="./thermomind_continuity_explainer.svg" width="100%" alt="ThermoMind Continuity Explainer"/>
 
 ---
 
