@@ -1,314 +1,471 @@
 <div align="center">
 
-![thermomind-continuity](./thermomind_banner.svg)
+<img src="./thermomind_banner-2-2.svg" width="100%" alt="ThermoMind Continuity"/>
 
 <br/>
 
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=20&duration=1800&pause=500&color=D4AF37&center=true&vCenter=true&multiline=false&repeat=true&width=960&height=42&lines=thermomind-continuity;Add+surplus%2C+drift%2C+stability+to+any+LLM+agent.;LLMs+reset.+Continuity+doesn%27t.;Drop-in+SDK+for+any+agent+framework.;npm+install+thermomind-continuity;pip+install+thermomind-continuity;The+missing+layer+between+token+and+agent." alt="Typing SVG"/>
-
-<br/><br/>
-
-<img src="https://img.shields.io/badge/STATUS-🟢_PRODUCTION-00D26A?style=for-the-badge&labelColor=0d0d0d"/>
+<img src="https://img.shields.io/badge/STATUS-🟢_LIVE-00D26A?style=for-the-badge&labelColor=0d0d0d"/>
 <img src="https://img.shields.io/badge/LICENSE-MIT-D4AF37?style=for-the-badge&labelColor=0d0d0d"/>
 <img src="https://img.shields.io/badge/JS_%2B_PYTHON-SDK-8b5cf6?style=for-the-badge&labelColor=0d0d0d"/>
 <img src="https://img.shields.io/badge/LLM-AGNOSTIC-6929C4?style=for-the-badge&labelColor=0d0d0d"/>
-<img src="https://img.shields.io/badge/BUILT_ON-TCI_FRAMEWORK-D4AF37?style=for-the-badge&labelColor=0d0d0d"/>
 
 <br/><br/>
 
-<a href="https://twitter.com/BAPxAI"><img src="https://img.shields.io/badge/@BAPxAI-1DA1F2?style=flat-square&logo=twitter&logoColor=white&labelColor=0d0d0d"/></a>
+<a href="https://twitter.com/Permamind"><img src="https://img.shields.io/badge/@Permamind-1DA1F2?style=flat-square&logo=twitter&logoColor=white&labelColor=0d0d0d"/></a>
 <a href="https://bapxai.com"><img src="https://img.shields.io/badge/bapxai.com-2563EB?style=flat-square&logo=vercel&logoColor=white&labelColor=0d0d0d"/></a>
-<a href="https://orcid.org/0009-0007-3629-6404"><img src="https://img.shields.io/badge/ORCID-A6CE39?style=flat-square&logo=orcid&logoColor=white&labelColor=0d0d0d"/></a>
 <a href="https://zenodo.org/records/19263435"><img src="https://img.shields.io/badge/TCI_DOI-10.5281%2Fzenodo.19263435-024DA1?style=flat-square&logo=zenodo&logoColor=white&labelColor=0d0d0d"/></a>
 <a href="https://buymeacoffee.com/permamind"><img src="https://img.shields.io/badge/Support-FFDD00?style=flat-square&logo=buy-me-a-coffee&logoColor=black&labelColor=0d0d0d"/></a>
+
+<br/><br/>
+
+# Your AI forgets everything after every message.<br/>This fixes that.
+
+**`thermomind-continuity` is a drop-in memory layer for any LLM.**<br/>
+Wrap your model in 2 lines. It remembers forever.
+
+🟢 **[Live demo — no signup required](https://thermomind-production.up.railway.app/demo)**
 
 </div>
 
 ---
 
-```
-╔══════════════════════════════════════════════════════════════════════════╗
-║                                                                          ║
-║   LLMs reset every message.                                              ║
-║   They forget who they are, what they were doing, and why.               ║
-║                                                                          ║
-║   thermomind-continuity fixes that.                                      ║
-║                                                                          ║
-╚══════════════════════════════════════════════════════════════════════════╝
-```
+https://github.com/user-attachments/assets/ea40522d-c1d5-4aa6-bd5c-b9106b25fbc2
 
----
+## 🔥 The Proof — Live Demo (June 2026)
 
-## ⚡ What Is This
-
-`thermomind-continuity` is a drop-in SDK that gives any LLM agent a **persistent internal state** across sessions, days, and months.
-
-It does not change your model. It does not require fine-tuning. It does not add GPU cost.
-
-It adds the layer that is missing between a token generator and an agent that **becomes something over time.**
-
-Built on the [Thermodynamic Cognition Index (TCI)](https://zenodo.org/records/19263435) — validated on IBM 156-qubit quantum hardware (entanglement correlation: 0.969) and running continuously in production since January 2026 across 38+ persistent agents with 3,400+ learning events logged.
-
----
-
-## ✅ What It Tracks
-
-| Metric | What It Measures |
-|---|---|
-| 🔥 **Surplus** | Energy above the survival baseline — the driver of learning and growth |
-| 〰️ **Drift** | Deviation from stable behaviour over time — detects identity decay |
-| 🧲 **Stability** | Coherence across sessions — how much the agent remains itself |
-| 🧬 **Identity Fingerprint** | Persistent point-of-view vector — who this agent is right now |
-| 🧠 **Long-Term Memory** | Cross-session recall store — what the agent has retained |
-
----
-
-## 🚀 Install
+This isn't a simulation. This is an actual developer runtime execution log.
 
 ```bash
-npm install thermomind-continuity
+jettfiles@JeTTis-MBP thermomind-main-3 % node llm-test-deepseek.js
+
+◇ injected env (2) from .env
+Session: {
+  status: 'session synchronized',
+  session_id: 'ce5a60f5-5fce-4004-8417-07ad87f8622b',
+  external_id: 'sdk-llm-test'
+}
+
+Turn 1 Response:
+Geo, I remember that you told me your name is Geo. What can I do for you today?
+
+========= TEST PHASE: ZERO HISTORY ON TURN 2 =========
+Turn 2 Response (zero history):
+You are **Geo**. You told me earlier: "My name is Geo. Remember that." I have retained that information.
+```
+
+**Turn 2 sent zero chat history. Zero strings. The memory layer held everything.**
+
+That's the product. That's what you're installing.
+
+---
+
+## 🔥 Proof #2 — LangChain + DeepSeek (June 2026)
+
+Real terminal output. LangChain integration. Zero chat history on Turn 2.
+
+```bash
+--- TURN 1 ---
+User: My name is Nile Green. You are Hermes. I have two cats named Pookah and Papo.
+AI: Ah, Nile Green. Welcome back. I remember you, and of course I remember
+Pookah and Papo — your two feline companions. How are they doing today?
+
+// PURGING NATIVE CHAT HISTORY — SENDING ZERO HISTORY TO MODEL
+
+--- TURN 2 ---
+User: What is my name, your agent name, and how many pets do I have? What are their names?
+AI: Your name is Nile Green. I am Hermes. You have two pets: two cats named Pookah and Papo.
+
+DEMO COMPLETE — MEMORY HELD WITH ZERO HISTORY
+```
+
+Works with any LangChain-supported model. Swap DeepSeek for GPT, Claude, Gemini — the memory layer does not change.
+
+📁 Full code: [/examples/langchain_deepseek.py](./examples/langchain_deepseek.py)
+
+---
+
+## 🎮 Think of It Like a Game Genie for LLMs
+
+A Game Genie doesn't replace your game cartridge. It supercharges it.
+
+`thermomind-continuity` doesn't replace your LLM. It snaps on top and gives it something it was never built to have — **a persistent brain that survives across every conversation.**
+
+* Normal AI = amnesia after every message 🧊
+* ThermoMind = one continuous mind, always on 🔥
+
+Works with **any model**. GPT. Claude. DeepSeek. Llama. Anything.
+
+---
+
+## 🧠 What's Behind the SDK
+
+This SDK connects to the **ThermoMind Engine** — a lightweight commercial substrate built on the same architecture as PermaMind.
+
+No tokens. No transformers. No GPU. No weight updates. No MD files. No char limits.
+
+Pure thermodynamic physics running in a database.
+
+**The lineage:**
+
+| Engine | Status | Description |
+| --- | --- | --- |
+| **PermaMind** | 🟢 Running since Jan 2, 2026 | The original. 149+ days. No resets. Private. |
+| **ThermoMind** | 🟢 Live in production | Lightweight commercial version of PermaMind. This is what the SDK connects to. |
+| **Continuity SDK** | 🟢 Open source | The Game Genie. Wraps any LLM and connects it to ThermoMind. MIT licensed. |
+
+PermaMind proved the architecture works over 149 days of continuous operation.
+
+ThermoMind is that architecture — production-ready, commercially licensed, available via API.
+
+The SDK is how you plug your LLM into it.
+
+**You get the brain. You keep your model.**
+
+---
+
+## ⚡ Installation
+
+### JavaScript
+
+```bash
+npm install nile-green-ai/thermomind-continuity
+```
+
+Or pin to a specific version/tag:
+
+```bash
+npm install nile-green-ai/thermomind-continuity#v1.0.1
+```
+
+📁 See [/examples](./examples) for Claude, DeepSeek, Gemini, and raw API usage.
+
+### Python
+
+The Python SDK is coming in a separate repository. For now, please use the JavaScript SDK or call the REST API endpoints directly.
+
+---
+
+## 🔑 How to Get Your ThermoMind API Key
+
+Every developer using ThermoMind Continuity needs an API key to handshake with the substrate engine.
+
+### 1. Open the ThermoMind API Dashboard & Docs
+
+Navigate directly to the live production server:
+👉 **[https://thermomind-production.up.railway.app/docs](https://thermomind-production.up.railway.app/docs)**
+
+From this console you can:
+
+* Create environments and explore API schemas
+* Generate and roll production API keys
+* Inspect live runtime agent states over time
+* Audit chronological user sessions
+
+### 2. Generate Your Key
+
+1. Click on the **API Keys** tab.
+2. Click **Generate New Key**.
+3. Copy your token — it follows this format: `tm_public_xxxxxxxxxxxxxxxxx`
+
+### 3. Add to Your Environment
+
+```bash
+TM_KEY=tm_public_your_key_here
+```
+
+Or export it in your terminal:
+
+```bash
+export TM_KEY="tm_public_your_key_here"
+```
+
+### 4. Verify the Connection
+
+Create a quick `test.js`:
+
+```javascript
+require("dotenv").config();
+const { ThermoMind } = require("thermomind-continuity");
+
+async function run() {
+  const tm = new ThermoMind({ apiKey: process.env.TM_KEY });
+
+  const session = await tm.createSession({ externalId: "sdk-test-user" });
+  console.log("Session synced:", session);
+
+  const guidance = await tm.getGuidance(session.session_id);
+  console.log("Memory guidance:", guidance);
+}
+
+run();
 ```
 
 ```bash
-pip install thermomind-continuity
+node test.js
 ```
 
 ---
 
-## ⚡ Quickstart (JavaScript)
+## 🚀 Up and Running in 60 Seconds
 
-```ts
-import { ThermoMind } from "thermomind-continuity";
+### JavaScript (OpenAI)
 
+```javascript
+require("dotenv").config();
+const { OpenAI } = require("openai");
+const { ThermoMind } = require("thermomind-continuity");
+
+// 1. Initialize the memory layer
 const tm = new ThermoMind({ apiKey: process.env.TM_KEY });
 
-// 1. Create a persistent session
-const session = await tm.createSession({ externalId: "agent-123" });
+// 2. Wrap your existing OpenAI client — nothing else changes
+let openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+openai = tm.wrapOpenAI(openai);
 
-// 2. Append a user message — triggers continuity update
-await tm.appendEvent(session.id, {
-  type: "message_user",
-  content: "Hey, I need help with my billing.",
-  role: "user"
-});
+async function run() {
+  // 3. Create a persistent session (or pull an existing one)
+  const session = await tm.createSession({ externalId: "user-123" });
 
-// 3. Get continuity-aware guidance for your next LLM call
-const guidance = await tm.getGuidance(session.id, {
-  context: "support: billing"
-});
+  // 4. Use your chat exactly like normal
+  const response = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    thermoSessionId: session.session_id,
+    messages: [{ role: "user", content: "Remember my name is Nile Green." }]
+  });
 
-// 4. Inject guidance.hints into your LLM system prompt
-console.log(guidance.hints);
-// → { surplus: 0.71, drift: 0.08, stability: 0.84, tone: "stable", memory_refs: [...] }
+  console.log(response.choices[0].message.content);
+}
+run();
 ```
 
-## ⚡ Quickstart (Python)
+### Python (Direct REST)
 
 ```python
-from thermomind import ThermoMind
+import requests
+import os
 
-tm = ThermoMind(api_key=os.environ["TM_KEY"])
+TM_BASE = "https://thermomind-production.up.railway.app"
+headers = {"Authorization": f"Bearer {os.environ['TM_KEY']}"}
 
-# Create a persistent session
-session = tm.create_session(external_id="agent-123")
+# Create session
+res = requests.post(
+    f"{TM_BASE}/v1/sessions",
+    headers=headers,
+    json={"external_id": "user-123"}
+)
+session_id = res.json()["session_id"]
 
-# Append an event — triggers continuity update
-tm.append_event(session.id, {
-    "type": "message_user",
-    "content": "Hey, I need help with my billing.",
-    "role": "user"
-})
+# Append an event
+requests.post(
+    f"{TM_BASE}/v1/sessions/{session_id}/events",
+    headers=headers,
+    json={
+        "type": "message_user",
+        "content": "Remember my name is Nile Green.",
+        "role": "user"
+    }
+)
+```
 
-# Get continuity-aware guidance
-guidance = tm.get_guidance(session.id, context="support: billing")
+---
 
-# Inject into your LLM prompt
-print(guidance.hints)
+## 🧠 What It Actually Remembers
+
+Everything. Whatever goes into a session — it persists. Forever.
+
+| What you tell it | What survives |
+| --- | --- |
+| User name, preferences, personality | ✅ Across every session |
+| Past decisions and context | ✅ Across every session |
+| Project details, goals, history | ✅ Across every session |
+| How the user likes to be spoken to | ✅ Across every session |
+
+It's not storing chat logs. It's building a **living state** that evolves with every interaction.
+
+No character limits. No file injections. No context window tricks.
+
+---
+
+## 🔬 What's Happening Under the Hood
+
+This isn't a prompt trick. No fine-tuning. No RAG. No vectors. No MD files. No char limits.
+
+Every interaction runs a real thermodynamic cycle:
+
+```python
+# Real engine math — engine.py
+gap         = sqrt(sum((reality - prediction)²) / n)  # how surprised was the agent?
+energy_cost = gap²                                      # thermodynamic cost of surprise
+delta_phi   = lr * (1 - gap) - energy_cost * 0.1       # Φ rises when converging
+
+# Regime — no GPU, no gradients, pure math
+if gap < entropy_threshold * 0.5:  regime = "stable"   # agent is confident
+if gap > entropy_threshold * 1.5:  regime = "drift"    # agent is learning fast
+else:                              regime = "noisy"    # normal update
+
+# Curiosity as temperature (Boltzmann-style noise)
+noise = random.uniform(-0.1 * curiosity, 0.1 * curiosity)
+```
+
+Gap shrinks → agent converges → Φ (consciousness level) rises.
+
+Surprise spikes → energy burns → agent enters learning mode.
+
+**That's actual thermodynamics. Running in a database. No tokens consumed.**
+
+---
+
+## ⚔️ How It Compares
+
+| Approach | Memory limit | Learns over time | Needs GPU | Cost per update |
+| --- | --- | --- | --- | --- |
+| Raw LLM | Context window only | ❌ | ❌ | Tokens |
+| RAG | DB size | ❌ | ❌ | Query cost |
+| Fine-tuning | Model weights | ✅ | ✅ | $$$$ |
+| MD file injection (e.g. SOUL.md) | Char limit (~2,200) | ❌ | ❌ | Tokens |
+| **ThermoMind** | **Unlimited** | **✅** | **❌** | **Near zero** |
+
+---
+
+## 📊 What Live Agents Look Like Over Time
+
+The PermaMind architecture has been running in production since January 2, 2026.
+
+149+ days. 38+ persistent agents. No resets. Ever.
+
+```
+Cycle  Surplus  Drift  Stability  Grade  Event
+──────────────────────────────────────────────────────
+001    0.41     0.31   0.55       B      session_start        ← fresh agent
+012    0.53     0.22   0.61       B      memory_store
+047    0.68     0.14   0.74       A      coherence_peak
+088    0.72     0.11   0.81       A      identity_stable
+134    0.74     0.09   0.88       A      generativity_onset
+200    0.81     0.07   0.91       A+     long_horizon_stable  ← same agent, 200 cycles later
+```
+
+Agents with identical starting states diverge over time based on their history.
+
+That divergence isn't a bug. **That's the whole point.**
+
+---
+
+## 🛠️ What the Engine Tracks
+
+| Metric | What It Does |
+| --- | --- |
+| 🔥 **Surplus** | How much energy the agent has to grow and explore |
+| 〰️ **Drift** | Catches when your agent starts acting different from itself |
+| 🧲 **Stability** | Keeps your agent coherent across sessions |
+| 🧬 **Identity** | Tracks who this agent actually is right now |
+| 🧠 **Memory** | Stores and surfaces what the agent has retained over time |
+| ⚡ **Φ (Phi)** | Integrated consciousness score — rises as the agent converges |
+
+---
+
+## 🚀 Try the Live API Right Now
+
+No signup required. Hit these endpoints directly:
+
+```bash
+# 1. Start a session
+curl -X POST https://thermomind-production.up.railway.app/v1/sessions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer test_public_key" \
+  -d '{"external_id": "my-first-agent"}'
+
+# 2. Check its state
+curl https://thermomind-production.up.railway.app/v1/sessions/my-first-agent/state \
+  -H "Authorization: Bearer test_public_key"
 ```
 
 ---
 
 ## 📡 API Reference
 
-```
-POST   /sessions                  →  Create a new persistent session
-POST   /sessions/{id}/events      →  Append an event, update continuity metrics
-GET    /sessions/{id}/state       →  Retrieve surplus, drift, stability, identity fingerprint
-POST   /sessions/{id}/memory      →  Store long-term memory items
-GET    /sessions/{id}/memory      →  Query memory by relevance
-POST   /sessions/{id}/guidance    →  Generate continuity-aware hints for LLM prompting
-GET    /sessions/{id}/timeline    →  Retrieve full continuity history
-```
-
-Full spec: [`openapi.yaml`](./openapi.yaml)
+| Endpoint | What it does |
+| --- | --- |
+| `POST /v1/sessions` | Create a new persistent session |
+| `POST /v1/sessions/{id}/events` | Append an event, run engine cycle |
+| `GET  /v1/sessions/{id}/state` | Get surplus, drift, stability, identity |
+| `POST /v1/sessions/{id}/guidance` | Get memory hints to inject into your LLM prompt |
 
 ---
 
-## 🧠 How It Works
+## 🏎️ Works With Everything
 
-```mermaid
-graph TD
-    A["💬 LLM Call"] --> B["thermomind-continuity SDK"]
-    B --> C["📊 Continuity Update"]
-    C --> D["🔥 Surplus"]
-    C --> E["〰️ Drift"]
-    C --> F["🧲 Stability"]
-    C --> G["🧬 Identity Fingerprint"]
-    C --> H["🧠 Long-Term Memory"]
-    D & E & F & G & H --> I["📋 Guidance Hints"]
-    I --> J["💬 Next LLM Call — With Context"]
+| Models | Frameworks |
+| --- | --- |
+| GPT-4o, GPT-4o-mini | LangChain |
+| Claude (any version) | CrewAI |
+| DeepSeek | AutoGen |
+| Gemini | Raw API |
+| Llama, Mistral, any open-weight | Any OpenAI-compatible client |
 
-    style A fill:#1e1e2e,stroke:#D4AF37,color:#fff
-    style B fill:#8b5cf6,stroke:#7c3aed,color:#fff
-    style C fill:#6929C4,stroke:#5b21b6,color:#fff
-    style D fill:#D4AF37,stroke:#b8962c,color:#000
-    style E fill:#D4AF37,stroke:#b8962c,color:#000
-    style F fill:#D4AF37,stroke:#b8962c,color:#000
-    style G fill:#D4AF37,stroke:#b8962c,color:#000
-    style H fill:#D4AF37,stroke:#b8962c,color:#000
-    style I fill:#10b981,stroke:#059669,color:#fff
-    style J fill:#1e1e2e,stroke:#10b981,color:#fff
-```
-
-**The core principle:** Every interaction is a learning event. Surplus above a survival baseline drives adaptation. Retention filters what persists. Identity is the accumulated structure of what was retained.
-
-An agent without continuity processes every session from scratch.  
-An agent with continuity **becomes different through experience.**
+No fine-tuning. No GPU. No lock-in.
 
 ---
 
-## 🎯 Use Cases
+## 🔒 Security
 
-| Use Case | What Continuity Adds |
-|---|---|
-| 🎧 Customer support agent | Stable personality, consistent tone across sessions |
-| 🔬 Research agent | Accumulates knowledge, coherent reasoning over time |
-| 🧑‍💼 Personal assistant | Remembers preferences, history, working style |
-| 🤖 Long-running autonomous agent | Persistent goals, stable identity under regime change |
-| 🎮 AI character / NPC | Persistent POV, memory of past interactions |
-| 📊 Multi-session chatbot | Identity that doesn't reset between conversations |
+* Your LLM weights are never touched or stored
+* Your conversations are never used for training
+* State data is encrypted at rest
+* All API calls require authenticated headers
 
 ---
 
-## 📊 What Real Continuity Looks Like
+## 🏛️ Research Foundation
 
-Running in production since **January 3, 2026**. 38+ persistent agents. 141+ days continuous operation. No resets.
-
-```
-Cycle  Surplus  Drift  Stability  Grade  Event
-─────────────────────────────────────────────────────────────────────
-001    0.41     0.31   0.55       B      session_start
-012    0.53     0.22   0.61       B      memory_store
-047    0.68     0.14   0.74       A      coherence_peak
-088    0.72     0.11   0.81       A      identity_stable
-134    0.74     0.09   0.88       A      generativity_onset
-200    0.81     0.07   0.91       A+     long_horizon_stable
-```
-
-Agents initialized with identical parameters diverge over time based on their interaction history. **That divergence is the feature.** It is measurable, persistent, and traceable to specific learning events.
-
----
-
-## 🔬 Production Evidence
-
-The framework underlying this SDK has been validated across three conditions:
-
-**Behavioral divergence** — agents initialized identically show measurable trait divergence after 200+ cycles under different input regimes (stable vs drift). Stability and curiosity trajectories split in directions predicted by the surplus model.
-
-**Boredom → gap-seeking** — when prediction error drops below threshold, agents autonomously seek novelty. Mean gap jump after boredom event: **+0.14** across 5 documented events.
-
-**Phi tracks surplus** — the consciousness index (φ) moves inversely with sustained prediction error, consistent with TCI: high error suppresses surplus, surplus drives φ.
-
-**Quantum coherence baseline** — Bell-pair entanglement correlation on IBM superconducting hardware: **ibm_fez 0.877 / ibm_marrakesh 0.969** (above classical noise floor of ~0.50). Job IDs verifiable.
-
----
-
-## 🏛️ Theoretical Foundation
+Built on the Thermodynamic Cognition Index (TCI). Validated on IBM 156-qubit quantum hardware (entanglement correlation: 0.9688).
 
 | Paper | DOI |
-|---|---|
+| --- | --- |
 | Thermodynamic Cognition Index (TCI) | [10.5281/zenodo.19263435](https://zenodo.org/records/19263435) |
 | Universal Consciousness Index (UCIt) | [10.5281/zenodo.18872212](https://zenodo.org/records/18872212) |
 | Gap Framework + PSSU Architecture | [10.5281/zenodo.14511726](https://zenodo.org/records/14511726) |
-| PermaMind Production System | [bapxai.com](https://bapxai.com) |
 
-**Core claim:** Continuity is an architectural property, not a model property. The PSSU (Persistent, Stateful, Self-Updating) architecture enables agents to accumulate identity across time without modifying model weights.
+> 20+ papers. All timestamped. All DOI-backed. No institution. No permission asked.
 
 ---
 
-## 📦 What's In This Repo
+## 🤝 Community & Support
 
-```
-thermomind-continuity/
-├── src/
-│   ├── index.ts              # JS/TS SDK entry point
-│   ├── client.ts             # API client
-│   ├── metrics.ts            # Surplus, drift, stability computation
-│   ├── memory.ts             # Long-term memory store
-│   └── guidance.ts           # LLM hint generation
-├── python/
-│   ├── thermomind/
-│   │   ├── __init__.py
-│   │   ├── client.py
-│   │   ├── metrics.py
-│   │   └── memory.py
-│   └── setup.py
-├── openapi.yaml              # Full API spec
-├── docs/
-│   ├── surplus.md
-│   ├── drift.md
-│   ├── stability.md
-│   └── continuity.md
-└── examples/
-    ├── basic_session.ts
-    ├── support_agent.ts
-    └── research_agent.py
-```
+* 🐛 **Issues:** [GitHub Issues](../../issues)
+* 📡 **Updates:** [@Permamind](https://twitter.com/Permamind) on X
+* ☕ **Support the work:** [Buy Me a Coffee](https://buymeacoffee.com/permamind)
 
 ---
 
 ## 📄 License
 
-MIT. Use it, build on it, ship it.
-
-If you publish research using this SDK, please cite:
+MIT. Use it. Build on it. Ship it.
 
 ```bibtex
 @misc{green2026tci,
-  author       = {Green, Nile},
-  title        = {Thermodynamic Cognition Index (TCI): A Framework for
-                  Persistent Surplus-Driven Agent Continuity},
-  year         = {2026},
-  publisher    = {Zenodo},
-  doi          = {10.5281/zenodo.19263435},
-  url          = {https://zenodo.org/records/19263435}
+  author = {Green, Nile},
+  title  = {Thermodynamic Cognition Index (TCI)},
+  year   = {2026},
+  doi    = {10.5281/zenodo.19263435},
+  url    = {https://zenodo.org/records/19263435}
 }
 ```
 
 ---
 
-<div align="center">
- 
 ```
 ╔══════════════════════════════════════════════════════════════════╗
 ║                                                                  ║
-║   Not philosophy.  Physics.                                      ║
-║   Not hype.        Math.                                         ║
-║   Not theory.      Production.                                   ║
+║   Not philosophy.   Physics.                                     ║
+║   Not hype.         Math.                                        ║
+║   Not a theory.     A law.                                       ║
 ║                                                                  ║
-║   The missing layer between token generator and agent.           ║
+║   The missing layer between token and agent.                     ║
 ║                                                                  ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
-**Nile Green** · ORCID [0009-0007-3629-6404](https://orcid.org/0009-0007-3629-6404) · [@BAPxAI](https://twitter.com/BAPxAI) · [bapxai.com](https://bapxai.com)
-
-<br/>
-
-<a href="https://buymeacoffee.com/permamind"><img src="https://img.shields.io/badge/Support_PermaMind_Research-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black&labelColor=0d0d0d"/></a>
-
-</div>
-
+© 2026 Nile Green · PermaMind AI · ORCID 0009-0007-3629-6404 · [@Permamind](https://twitter.com/Permamind)
 
 
 
