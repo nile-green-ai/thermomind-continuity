@@ -1,0 +1,209 @@
+<svg width="960" height="280" viewBox="0 0 960 280" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <clipPath id="banner">
+    <rect width="960" height="280" rx="14"/>
+  </clipPath>
+  <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#b8962c"/>
+    <stop offset="35%" stop-color="#D4AF37"/>
+    <stop offset="65%" stop-color="#edd060"/>
+    <stop offset="100%" stop-color="#D4AF37"/>
+  </linearGradient>
+  <linearGradient id="bggrad" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#07090f"/>
+    <stop offset="100%" stop-color="#050508"/>
+  </linearGradient>
+  <filter id="glow" x="-5%" y="-40%" width="110%" height="180%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <pattern id="dots" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+    <circle cx="11" cy="11" r="0.7" fill="#D4AF37" opacity="0.1"/>
+  </pattern>
+</defs>
+
+<g clip-path="url(#banner)">
+
+  <!-- Background -->
+  <rect width="960" height="280" fill="url(#bggrad)"/>
+  <rect width="960" height="280" fill="url(#dots)"/>
+
+  <!-- Ambient glows -->
+  <ellipse cx="0" cy="140" rx="260" ry="180" fill="#D4AF37" opacity="0.032"/>
+  <ellipse cx="960" cy="140" rx="220" ry="160" fill="#7c3aed" opacity="0.042"/>
+  <ellipse cx="480" cy="280" rx="300" ry="120" fill="#D4AF37" opacity="0.018"/>
+
+  <!-- Borders -->
+  <rect x="0" y="0" width="960" height="1.5" fill="#D4AF37" opacity="0.55"/>
+  <rect x="0" y="278.5" width="960" height="1.5" fill="#D4AF37" opacity="0.55"/>
+  <rect x="0" y="0" width="1.5" height="280" fill="#D4AF37" opacity="0.3"/>
+  <rect x="958.5" y="0" width="1.5" height="280" fill="#D4AF37" opacity="0.3"/>
+
+  <!-- HUD Corner brackets -->
+  <path d="M 18 42 L 18 18 L 52 18" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="square" opacity="0.65"/>
+  <path d="M 942 42 L 942 18 L 908 18" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="square" opacity="0.65"/>
+  <path d="M 18 238 L 18 262 L 52 262" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="square" opacity="0.65"/>
+  <path d="M 942 238 L 942 262 L 908 262" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="square" opacity="0.65"/>
+
+  <!-- LIVE indicator -->
+  <circle cx="38" cy="32" r="4.5" fill="#00D26A"/>
+  <rect x="26" y="22" width="82" height="20" rx="10" fill="#00D26A" fill-opacity="0.09" stroke="#00D26A" stroke-width="0.7" opacity="0.7"/>
+  <text x="50" y="36" font-family="'SFMono-Regular',Consolas,'Liberation Mono',monospace" font-size="9.5" fill="#00D26A" letter-spacing="1.5" font-weight="600">LIVE</text>
+
+  <!-- TCI label top right -->
+  <rect x="816" y="22" width="130" height="18" rx="3" fill="none" stroke="#D4AF37" stroke-width="0.6" opacity="0.28"/>
+  <text x="881" y="34" text-anchor="middle" font-family="'SFMono-Regular',Consolas,monospace" font-size="8" fill="#D4AF37" opacity="0.45" letter-spacing="1.2">TCI FRAMEWORK</text>
+
+  <!-- =============================================
+       LEFT: PRODUCT IDENTITY (x 32–400)
+  ============================================== -->
+
+  <!-- thermomind -->
+  <text x="38" y="113"
+    font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace"
+    font-size="55" font-weight="700" letter-spacing="-1.5"
+    fill="url(#gold)" filter="url(#glow)">thermomind</text>
+
+  <!-- Separator -->
+  <line x1="38" y1="127" x2="388" y2="127" stroke="#D4AF37" stroke-width="0.8" opacity="0.38"/>
+
+  <!-- CONTINUITY -->
+  <text x="42" y="156"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="21" font-weight="400" letter-spacing="11"
+    fill="#f5f5f5" opacity="0.48">CONTINUITY</text>
+
+  <!-- Separator 2 -->
+  <line x1="38" y1="170" x2="388" y2="170" stroke="#D4AF37" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- Tagline -->
+  <text x="38" y="192"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="12" fill="#f5f5f5" opacity="0.36">Game Genie for your AI.</text>
+
+  <!-- npm install pill -->
+  <rect x="38" y="206" width="248" height="22" rx="11"
+    fill="#D4AF37" fill-opacity="0.07" stroke="#D4AF37" stroke-width="0.8" opacity="0.65"/>
+  <text x="162" y="221" text-anchor="middle"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="10" fill="#D4AF37" opacity="0.78">npm install thermomind-continuity</text>
+
+  <!-- Center divider -->
+  <line x1="416" y1="46" x2="416" y2="244" stroke="#D4AF37" stroke-width="0.6" opacity="0.18"/>
+
+  <!-- =============================================
+       RIGHT: AGENT STATE PANEL (x 424–940)
+  ============================================== -->
+
+  <!-- Panel border -->
+  <rect x="424" y="46" width="512" height="198" rx="6"
+    fill="#D4AF37" fill-opacity="0.02" stroke="#D4AF37" stroke-width="0.6" opacity="0.18"/>
+
+  <!-- Panel header -->
+  <text x="434" y="62"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="9" fill="#f5f5f5" opacity="0.28" letter-spacing="3">AGENT STATE</text>
+
+  <!-- Grade badge (top right of panel) -->
+  <rect x="882" y="50" width="42" height="38" rx="5"
+    fill="#D4AF37" fill-opacity="0.09" stroke="#D4AF37" stroke-width="0.8" opacity="0.65"/>
+  <text x="903" y="65" text-anchor="middle"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="8.5" fill="#D4AF37" opacity="0.55" letter-spacing="0.5">GRD</text>
+  <text x="903" y="82" text-anchor="middle"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="14" font-weight="700" fill="#D4AF37" opacity="0.9">A+</text>
+
+  <!-- BAR ROWS
+       Label x=434  |  Bar bg x=522 w=318 h=13 rx=6  |  Value x=847
+  -->
+
+  <!-- ROW 1: SURPLUS 0.81 → 318*0.81=257 -->
+  <text x="434" y="88"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="11" font-weight="600" fill="#D4AF37" opacity="0.9">SURPLUS</text>
+  <rect x="522" y="76" width="318" height="13" rx="6" fill="#D4AF37" fill-opacity="0.07"/>
+  <rect x="522" y="76" width="258" height="13" rx="6" fill="#D4AF37" fill-opacity="0.62"/>
+  <text x="847" y="88"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="11" fill="#D4AF37" opacity="0.82">0.81</text>
+
+  <!-- ROW 2: DRIFT 0.07 → 318*0.07=22  LOW = GOOD -->
+  <text x="434" y="120"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="11" font-weight="600" fill="#3b82f6" opacity="0.9">DRIFT</text>
+  <rect x="522" y="108" width="318" height="13" rx="6" fill="#3b82f6" fill-opacity="0.07"/>
+  <rect x="522" y="108" width="22" height="13" rx="6" fill="#3b82f6" fill-opacity="0.7"/>
+  <text x="847" y="120"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="11" fill="#3b82f6" opacity="0.82">0.07</text>
+  <text x="879" y="120"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="9" fill="#3b82f6" opacity="0.48">LOW</text>
+
+  <!-- ROW 3: STABILITY 0.91 → 318*0.91=289 -->
+  <text x="434" y="152"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="11" font-weight="600" fill="#10b981" opacity="0.9">STABILITY</text>
+  <rect x="522" y="140" width="318" height="13" rx="6" fill="#10b981" fill-opacity="0.07"/>
+  <rect x="522" y="140" width="289" height="13" rx="6" fill="#10b981" fill-opacity="0.62"/>
+  <text x="847" y="152"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="11" fill="#10b981" opacity="0.82">0.91</text>
+
+  <!-- ROW 4: IDENTITY 0.88 → 318*0.88=280 -->
+  <text x="434" y="184"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="11" font-weight="600" fill="#8b5cf6" opacity="0.9">IDENTITY</text>
+  <rect x="522" y="172" width="318" height="13" rx="6" fill="#8b5cf6" fill-opacity="0.07"/>
+  <rect x="522" y="172" width="280" height="13" rx="6" fill="#8b5cf6" fill-opacity="0.62"/>
+  <text x="847" y="184"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="11" fill="#8b5cf6" opacity="0.82">0.88</text>
+
+  <!-- ROW 5: MEMORY 0.84 → 318*0.84=267 -->
+  <text x="434" y="216"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="11" font-weight="600" fill="#f59e0b" opacity="0.9">MEMORY</text>
+  <rect x="522" y="204" width="318" height="13" rx="6" fill="#f59e0b" fill-opacity="0.07"/>
+  <rect x="522" y="204" width="267" height="13" rx="6" fill="#f59e0b" fill-opacity="0.62"/>
+  <text x="847" y="216"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="11" fill="#f59e0b" opacity="0.82">0.84</text>
+
+  <!-- =============================================
+       BOTTOM STATS BAR
+  ============================================== -->
+  <rect x="0" y="250" width="960" height="30" fill="#D4AF37" fill-opacity="0.045"/>
+  <line x1="0" y1="250" x2="960" y2="250" stroke="#D4AF37" stroke-width="0.7" opacity="0.28"/>
+
+  <text x="120" y="269" text-anchor="middle"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="10" fill="#D4AF37" opacity="0.72">141+ DAYS LIVE</text>
+
+  <text x="248" y="269" text-anchor="middle"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="12" fill="#D4AF37" opacity="0.2">·</text>
+
+  <text x="360" y="269" text-anchor="middle"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="10" fill="#D4AF37" opacity="0.72">38+ AGENTS</text>
+
+  <text x="488" y="269" text-anchor="middle"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="12" fill="#D4AF37" opacity="0.2">·</text>
+
+  <text x="600" y="269" text-anchor="middle"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="10" fill="#D4AF37" opacity="0.72">NO RESETS</text>
+
+  <text x="728" y="269" text-anchor="middle"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="12" fill="#D4AF37" opacity="0.2">·</text>
+
+  <text x="850" y="269" text-anchor="middle"
+    font-family="'SFMono-Regular',Consolas,monospace"
+    font-size="10" fill="#D4AF37" opacity="0.72">IBM QUANTUM VALIDATED</text>
+
+</g>
+</svg>
