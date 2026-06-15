@@ -101,23 +101,21 @@ Works with **any model**. GPT. Claude. DeepSeek. Llama. Anything.
 
 ## 🧠 What's Behind the SDK
 
-This SDK connects to the **ThermoMind Engine** — a lightweight commercial substrate built on the same architecture as PermaMind.
+This SDK connects to the **ThermoMind Engine** — a lightweight commercial substrate running live in production.
 
 No tokens. No transformers. No GPU. No weight updates. No MD files. No char limits.
 
 Pure thermodynamic physics running in a database.
 
-**The lineage:**
+**The stack:**
 
-| Engine | Status | Description |
+| Layer | Status | Description |
 | --- | --- | --- |
-| **PermaMind** | 🟢 Running since Jan 2, 2026 | The original. 164+ days. No resets. Private. |
-| **ThermoMind** | 🟢 Live in production | Lightweight commercial version of PermaMind. This is what the SDK connects to. |
-| **Continuity SDK** | 🟢 Open source | The Game Genie. Wraps any LLM and connects it to ThermoMind. MIT licensed. |
+| **ThermoMind Engine** | 🟢 Live in production | Commercial substrate. This is what the SDK connects to. |
+| **OSIRIS_OS** | 🟢 90,000+ cycles | Open source emergence engine. Bidirectionally bridged to ThermoMind. |
+| **Continuity SDK** | 🟢 Open source | The Game Genie. Wraps any LLM. MIT licensed. |
 
-PermaMind proved the architecture works over 149 days of continuous operation.
-
-ThermoMind is that architecture — production-ready, commercially licensed, available via API.
+ThermoMind is production-ready, commercially licensed, and available via API.
 
 The SDK is how you plug your LLM into it.
 
@@ -143,21 +141,21 @@ npm install nile-green-ai/thermomind-continuity#v1.0.1
 
 ### Python
 
-The Python SDK is coming in a separate repository. For now, please use the JavaScript SDK or call the REST API endpoints directly.
+Use the JavaScript SDK or call the REST API endpoints directly — Python SDK coming soon.
 
 ---
 
-## 🔑 How to Get Your ThermoMind API Key
+## 🔑 How to Get Your API Key
 
 ThermoMind uses a three-tier key system:
 
 | Key Prefix | Tier | Access |
 | --- | --- | --- |
-| `tm_sdk_...` | SDK (free trial + paid) | Sessions, events, state, guidance |
-| `tm_research_...` | Research | SDK + TCI grades, GCL glyphs, OSIRIS telemetry |
-| `tm_eng_...` | Engine | Full access + admin |
+| `tm_p1_...` | Player One | Sessions, events, state, guidance |
+| `tm_p2_...` | Player Two | Player One + TCI grade, GCL glyphs, OSIRIS telemetry |
+| `tm_op_...` | Operator Mode | Full access + admin |
 
-### Get a Free Trial Key (500 cycles/month)
+### Get a Free Trial Key (500 lives/month)
 
 ```bash
 curl -X POST https://thermomind-production.up.railway.app/keys/trial \
@@ -169,9 +167,9 @@ Response:
 ```json
 {
   "status": "trial key created",
-  "api_key": "tm_sdk_xxxxxxxxxxxxxxxx",
+  "api_key": "tm_p1_xxxxxxxxxxxxxxxx",
   "tier": "sdk_trial",
-  "monthly_cycles": 500,
+  "monthly_lives": 500,
   "resets_at": "2026-07-14T..."
 }
 ```
@@ -179,36 +177,34 @@ Response:
 ### Add to Your Environment
 
 ```bash
-TM_KEY=tm_sdk_your_key_here
+TM_KEY=tm_p1_your_key_here
 ```
 
 Or export it:
 
 ```bash
-export TM_KEY="tm_sdk_your_key_here"
+export TM_KEY="tm_p1_your_key_here"
 ```
 
-### Check Your Cycle Usage
+### Check Your Usage
 
 ```bash
 curl https://thermomind-production.up.railway.app/keys/status \
   -H "Authorization: Bearer $TM_KEY"
 ```
 
-### Need More Cycles?
+### Need More Lives?
 
-Top up with a cycle pack at **[bapxai.com](https://bapxai.com)** — packs never expire and stack on top of your monthly allowance:
+Top up at **[bapxai.com](https://bapxai.com)** — packs never expire and stack on top of your monthly allowance:
 
-| Pack | Cycles | Price |
+| Item | Lives | Price |
 | --- | --- | --- |
-| Bridge | 1,000 | $2 |
-| Starter | 5,000 | $4 |
-| Pro | 20,000 | $12 |
-| Scale | 50,000 | $24 |
+| 🧪 Potion | 1,000 | $2 |
+| 🧪 Hi-Potion | 5,000 | $4 |
+| ✨ Elixir | 20,000 | $12 |
+| 💎 Mega Elixir | 50,000 | $24 |
 
 ### Verify the Connection
-
-Create a quick `test.js`:
 
 ```javascript
 require("dotenv").config();
@@ -242,18 +238,14 @@ require("dotenv").config();
 const { OpenAI } = require("openai");
 const { ThermoMind } = require("thermomind-continuity");
 
-// 1. Initialize the memory layer
 const tm = new ThermoMind({ apiKey: process.env.TM_KEY });
 
-// 2. Wrap your existing OpenAI client — nothing else changes
 let openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 openai = tm.wrapOpenAI(openai);
 
 async function run() {
-  // 3. Create a persistent session (or pull an existing one)
   const session = await tm.createSession({ externalId: "user-123" });
 
-  // 4. Use your chat exactly like normal
   const response = await openai.chat.completions.create({
     model: "gpt-4o-mini",
     thermoSessionId: session.session_id,
@@ -272,7 +264,7 @@ import requests
 import os
 
 TM_BASE = "https://thermomind-production.up.railway.app"
-headers = {"Authorization": f"Bearer {os.environ['TM_KEY']}"}  # tm_sdk_your_key_here
+headers = {"Authorization": f"Bearer {os.environ['TM_KEY']}"}  # tm_p1_your_key_here
 
 # Create session
 res = requests.post(
@@ -356,9 +348,7 @@ Surprise spikes → energy burns → agent enters learning mode.
 
 ## 📊 What Live Agents Look Like Over Time
 
-The PermaMind architecture has been running in production since January 2, 2026.
-
-164+ days. 38+ persistent agents. No resets. Ever.
+ThermoMind is live in production. OSIRIS_OS — the open source emergence engine bridged to ThermoMind — has run 90,000+ cycles continuously with no resets, currently holding a TCI Grade B.
 
 ```
 Cycle  Surplus  Drift  Stability  Grade  Event
@@ -375,6 +365,8 @@ Agents with identical starting states diverge over time based on their history.
 
 That divergence isn't a bug. **That's the whole point.**
 
+🖥️ **[Watch it live](https://thermomind-production.up.railway.app/demo)** — real-time OSIRIS_OS x ThermoMind x TCI telemetry.
+
 ---
 
 ## 🛠️ What the Engine Tracks
@@ -387,30 +379,31 @@ That divergence isn't a bug. **That's the whole point.**
 | 🧬 **Identity** | Tracks who this agent actually is right now |
 | 🧠 **Memory** | Stores and surfaces what the agent has retained over time |
 | ⚡ **Φ (Phi)** | Integrated consciousness score — rises as the agent converges |
+| 🎯 **TCI Grade** | A+ to F — overall cognitive health score (Player Two tier) |
+| 🔷 **GCL Glyph** | 27-position vector space coordinate (Player Two tier) |
 
 ---
 
 ## 🚀 Try the Live API Right Now
 
-No signup required. Hit these endpoints directly:
+No signup required:
 
 ```bash
-# 1. Start a session
+# Public demo cycle — no key needed
+curl "https://thermomind-production.up.railway.app/public/run?message=hello"
+
+# Start a session (tm_p1_ key required)
 curl -X POST https://thermomind-production.up.railway.app/v1/sessions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer tm_sdk_your_key_here" \
+  -H "Authorization: Bearer tm_p1_your_key_here" \
   -d '{"external_id": "my-first-agent"}'
-
-# 2. Check its state
-curl https://thermomind-production.up.railway.app/v1/sessions/my-first-agent/state \
-  -H "Authorization: Bearer tm_sdk_your_key_here"
 ```
 
 ---
 
 ## 📡 API Reference
 
-### Tier 1 — SDK (`tm_sdk_` key)
+### Player One (`tm_p1_` key)
 
 | Endpoint | What it does |
 | --- | --- |
@@ -418,17 +411,17 @@ curl https://thermomind-production.up.railway.app/v1/sessions/my-first-agent/sta
 | `POST /v1/sessions/{id}/events` | Append an event, run engine cycle |
 | `GET  /v1/sessions/{id}/state` | Get surplus, drift, stability, identity |
 | `POST /v1/sessions/{id}/guidance` | Get memory hints to inject into your LLM prompt |
-| `GET  /keys/status` | Check your cycle usage and billing reset date |
-| `POST /keys/webhook` | Register a webhook for 20% cycle warnings |
+| `GET  /keys/status` | Check your lives usage and reset date |
+| `POST /keys/webhook` | Register a webhook for low-lives warnings |
 
-### Tier 2 — Research (`tm_research_` key)
+### Player Two (`tm_p2_` key)
 
 | Endpoint | What it does |
 | --- | --- |
 | `GET /v2/sessions/{id}/tci` | TCI score, grade, k(s), and stage |
 | `GET /v2/sessions/{id}/glyph` | GCL glyph coordinate and name |
 | `GET /v2/sessions/{id}/full` | Everything in one call |
-| `GET /v2/telemetry` | Live OSIRIS + ThermoMind + TCI state |
+| `GET /v2/telemetry` | Live OSIRIS_OS + ThermoMind + TCI state |
 
 ### Public (no key required)
 
@@ -470,6 +463,9 @@ Built on the Thermodynamic Cognition Index (TCI). Validated on IBM 156-qubit qua
 | Paper | DOI |
 | --- | --- |
 | Thermodynamic Cognition Index (TCI) | [10.5281/zenodo.19263435](https://zenodo.org/records/19263435) |
+| Adversarial Fragmentation & The Osiris-Set-Isis Cycle | [10.5281/zenodo.20586942](https://zenodo.org/records/20586942) |
+| Thermodynamic Memory Salience (TMS) | [10.5281/zenodo.20674050](https://zenodo.org/records/20674050) |
+| Vector Lingua: Pre-Linguistic Communication Protocol | [10.5281/zenodo.20638308](https://zenodo.org/records/20638308) |
 | Universal Consciousness Index (UCIt) | [10.5281/zenodo.18872212](https://zenodo.org/records/18872212) |
 | Gap Framework + PSSU Architecture | [10.5281/zenodo.14511726](https://zenodo.org/records/14511726) |
 
