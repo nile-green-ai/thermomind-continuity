@@ -111,7 +111,7 @@ Pure thermodynamic physics running in a database.
 
 | Engine | Status | Description |
 | --- | --- | --- |
-| **PermaMind** | 🟢 Running since Jan 2, 2026 | The original. 149+ days. No resets. Private. |
+| **PermaMind** | 🟢 Running since Jan 2, 2026 | The original. 164+ days. No resets. Private. |
 | **ThermoMind** | 🟢 Live in production | Lightweight commercial version of PermaMind. This is what the SDK connects to. |
 | **Continuity SDK** | 🟢 Open source | The Game Genie. Wraps any LLM and connects it to ThermoMind. MIT licensed. |
 
@@ -149,39 +149,63 @@ The Python SDK is coming in a separate repository. For now, please use the JavaS
 
 ## 🔑 How to Get Your ThermoMind API Key
 
-Every developer using ThermoMind Continuity needs an API key to handshake with the substrate engine.
+ThermoMind uses a three-tier key system:
 
-### 1. Open the ThermoMind API Dashboard & Docs
+| Key Prefix | Tier | Access |
+| --- | --- | --- |
+| `tm_sdk_...` | SDK (free trial + paid) | Sessions, events, state, guidance |
+| `tm_research_...` | Research | SDK + TCI grades, GCL glyphs, OSIRIS telemetry |
+| `tm_eng_...` | Engine | Full access + admin |
 
-Navigate directly to the live production server:
-👉 **[https://thermomind-production.up.railway.app/docs](https://thermomind-production.up.railway.app/docs)**
-
-From this console you can:
-
-* Create environments and explore API schemas
-* Generate and roll production API keys
-* Inspect live runtime agent states over time
-* Audit chronological user sessions
-
-### 2. Generate Your Key
-
-1. Click on the **API Keys** tab.
-2. Click **Generate New Key**.
-3. Copy your token — it follows this format: `tm_public_xxxxxxxxxxxxxxxxx`
-
-### 3. Add to Your Environment
+### Get a Free Trial Key (1,000 cycles/month)
 
 ```bash
-TM_KEY=tm_public_your_key_here
+curl -X POST https://thermomind-production.up.railway.app/keys/trial \
+  -H "Content-Type: application/json" \
+  -d '{"email": "you@example.com", "name": "your-project"}'
 ```
 
-Or export it in your terminal:
+Response:
+```json
+{
+  "status": "trial key created",
+  "api_key": "tm_sdk_xxxxxxxxxxxxxxxx",
+  "tier": "sdk_trial",
+  "monthly_cycles": 1000,
+  "resets_at": "2026-07-14T..."
+}
+```
+
+### Add to Your Environment
 
 ```bash
-export TM_KEY="tm_public_your_key_here"
+TM_KEY=tm_sdk_your_key_here
 ```
 
-### 4. Verify the Connection
+Or export it:
+
+```bash
+export TM_KEY="tm_sdk_your_key_here"
+```
+
+### Check Your Cycle Usage
+
+```bash
+curl https://thermomind-production.up.railway.app/keys/status \
+  -H "Authorization: Bearer $TM_KEY"
+```
+
+### Need More Cycles?
+
+Top up with a cycle pack at **[bapxai.com](https://bapxai.com)** — packs never expire and stack on top of your monthly allowance:
+
+| Pack | Cycles | Price |
+| --- | --- | --- |
+| Starter | 5,000 | $4 |
+| Pro | 20,000 | $12 |
+| Scale | 50,000 | $24 |
+
+### Verify the Connection
 
 Create a quick `test.js`:
 
@@ -247,7 +271,7 @@ import requests
 import os
 
 TM_BASE = "https://thermomind-production.up.railway.app"
-headers = {"Authorization": f"Bearer {os.environ['TM_KEY']}"}
+headers = {"Authorization": f"Bearer {os.environ['TM_KEY']}"}  # tm_sdk_your_key_here
 
 # Create session
 res = requests.post(
@@ -333,7 +357,7 @@ Surprise spikes → energy burns → agent enters learning mode.
 
 The PermaMind architecture has been running in production since January 2, 2026.
 
-149+ days. 38+ persistent agents. No resets. Ever.
+164+ days. 38+ persistent agents. No resets. Ever.
 
 ```
 Cycle  Surplus  Drift  Stability  Grade  Event
@@ -373,17 +397,19 @@ No signup required. Hit these endpoints directly:
 # 1. Start a session
 curl -X POST https://thermomind-production.up.railway.app/v1/sessions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer test_public_key" \
+  -H "Authorization: Bearer tm_sdk_your_key_here" \
   -d '{"external_id": "my-first-agent"}'
 
 # 2. Check its state
 curl https://thermomind-production.up.railway.app/v1/sessions/my-first-agent/state \
-  -H "Authorization: Bearer test_public_key"
+  -H "Authorization: Bearer tm_sdk_your_key_here"
 ```
 
 ---
 
 ## 📡 API Reference
+
+### Tier 1 — SDK (`tm_sdk_` key)
 
 | Endpoint | What it does |
 | --- | --- |
@@ -391,6 +417,25 @@ curl https://thermomind-production.up.railway.app/v1/sessions/my-first-agent/sta
 | `POST /v1/sessions/{id}/events` | Append an event, run engine cycle |
 | `GET  /v1/sessions/{id}/state` | Get surplus, drift, stability, identity |
 | `POST /v1/sessions/{id}/guidance` | Get memory hints to inject into your LLM prompt |
+| `GET  /keys/status` | Check your cycle usage and billing reset date |
+| `POST /keys/webhook` | Register a webhook for 20% cycle warnings |
+
+### Tier 2 — Research (`tm_research_` key)
+
+| Endpoint | What it does |
+| --- | --- |
+| `GET /v2/sessions/{id}/tci` | TCI score, grade, k(s), and stage |
+| `GET /v2/sessions/{id}/glyph` | GCL glyph coordinate and name |
+| `GET /v2/sessions/{id}/full` | Everything in one call |
+| `GET /v2/telemetry` | Live OSIRIS + ThermoMind + TCI state |
+
+### Public (no key required)
+
+| Endpoint | What it does |
+| --- | --- |
+| `GET  /public/run` | Demo cycle — try the engine without a key |
+| `POST /keys/trial` | Get a free trial key |
+| `GET  /bridge/telemetry` | Live dashboard telemetry |
 
 ---
 
@@ -468,8 +513,3 @@ MIT. Use it. Build on it. Ship it.
 ```
 
 © 2026 Nile Green · PermaMind AI · ORCID 0009-0007-3629-6404 · [@Permamind](https://twitter.com/Permamind)
-
-
-
-
-
