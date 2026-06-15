@@ -201,6 +201,7 @@ Top up with a cycle pack at **[bapxai.com](https://bapxai.com)** — packs never
 
 | Pack | Cycles | Price |
 | --- | --- | --- |
+| Bridge | 1,000 | $2 |
 | Starter | 5,000 | $4 |
 | Pro | 20,000 | $12 |
 | Scale | 50,000 | $24 |
