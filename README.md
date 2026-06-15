@@ -157,7 +157,7 @@ ThermoMind uses a three-tier key system:
 | `tm_research_...` | Research | SDK + TCI grades, GCL glyphs, OSIRIS telemetry |
 | `tm_eng_...` | Engine | Full access + admin |
 
-### Get a Free Trial Key (1,000 cycles/month)
+### Get a Free Trial Key (500 cycles/month)
 
 ```bash
 curl -X POST https://thermomind-production.up.railway.app/keys/trial \
@@ -171,7 +171,7 @@ Response:
   "status": "trial key created",
   "api_key": "tm_sdk_xxxxxxxxxxxxxxxx",
   "tier": "sdk_trial",
-  "monthly_cycles": 1000,
+  "monthly_cycles": 500,
   "resets_at": "2026-07-14T..."
 }
 ```
