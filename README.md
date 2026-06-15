@@ -199,10 +199,14 @@ Top up at **[bapxai.com](https://bapxai.com)** — packs never expire and stack 
 
 | Item | Lives | Price |
 | --- | --- | --- |
-| 🧪 Potion | 1,000 | $2 |
-| 🧪 Hi-Potion | 5,000 | $4 |
-| ✨ Elixir | 20,000 | $12 |
-| 💎 Mega Elixir | 50,000 | $24 |
+| 🧪 Potion | 1,000 | $5 |
+| 🧪 Hi-Potion | 3,000 | $12 |
+| ✨ Elixir | 10,000 | $30 |
+| 🌟 Mega Elixir | 25,000 | $60 |
+
+### Player Two — $39/month — 7,500 Lives/month
+
+Upgrade to Player Two for research‑grade access: TCI scores, GCL glyphs, OSIRIS telemetry, and 7,500 monthly lives.
 
 ### Verify the Connection
 
@@ -510,3 +514,4 @@ MIT. Use it. Build on it. Ship it.
 ```
 
 © 2026 Nile Green · PermaMind AI · ORCID 0009-0007-3629-6404 · [@Permamind](https://twitter.com/Permamind)
+```
