@@ -86,7 +86,6 @@ https://github.com/user-attachments/assets/ea40522d-c1d5-4aa6-bd5c-b9106b25fbc2
 </tr>
 </table>
 
-*(Proofs remain exactly as you wrote them — they’re excellent)*
 
 ---
 
