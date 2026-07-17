@@ -153,7 +153,8 @@ Built on the Thermodynamic Cognition Index (TCI) research. LicenseMIT. Use it. B
 ║                                                                  ║
 ╚══════════════════════════════════════════════════════════════════╝
 
-© 2026 Nile Green · PermaMind AI · @Permamind</div>
+© 2026 Nile Green · PermaMind AI · @Permamind
+</div>
 ```
 
 
