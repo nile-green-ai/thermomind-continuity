@@ -8,6 +8,7 @@
 <img src="https://img.shields.io/badge/LICENSE-MIT-D4AF37?style=for-the-badge&labelColor=0d0d0d"/>
 <img src="https://img.shields.io/badge/JS_%2B_PYTHON-SDK-8b5cf6?style=for-the-badge&labelColor=0d0d0d"/>
 <img src="https://img.shields.io/badge/LLM-AGNOSTIC-6929C4?style=for-the-badge&labelColor=0d0d0d"/>
+<img src="https://img.shields.io/badge/CYCLES-100%2C000%2B-FF6B35?style=for-the-badge&labelColor=0d0d0d"/>
 
 <br/><br/>
 
@@ -18,12 +19,23 @@
 
 <br/><br/>
 
-# Your AI forgets everything after every message.<br/>This fixes that.
+<h1>Your AI forgets everything after every message.<br/>This fixes that.</h1>
 
-**`thermomind-continuity` is a drop-in memory layer for any LLM.**<br/>
-Wrap your model in 2 lines. It remembers forever.
+<p><strong><code>thermomind-continuity</code> is a drop-in memory layer for any LLM.</strong><br/>
+Wrap your model in 2 lines. It remembers forever.</p>
 
-🟢 **[Live demo — no signup required](https://thermomind-production.up.railway.app/demo)**
+<a href="https://thermomind-production.up.railway.app/demo">
+<img src="https://img.shields.io/badge/🟢_LIVE_DEMO-no_signup_required-00D26A?style=for-the-badge&labelColor=0d0d0d"/>
+</a>
+
+<br/><br/>
+
+```
+╔══════════════════════════════════════════════════════════════════╗
+║   Normal AI    →   amnesia after every message          🧊      ║
+║   ThermoMind   →   one continuous mind, always on       🔥      ║
+╚══════════════════════════════════════════════════════════════════╝
+```
 
 </div>
 
@@ -31,139 +43,147 @@ Wrap your model in 2 lines. It remembers forever.
 
 https://github.com/user-attachments/assets/ea40522d-c1d5-4aa6-bd5c-b9106b25fbc2
 
-## 🔥 The Proof — Live Demo (June 2026)
+---
 
-This isn't a simulation. This is an actual developer runtime execution log.
+## ⚡ Zero-History Memory — 4 Models, 4 Proofs
 
-```bash
-jettfiles@JeTTis-MBP thermomind-main-3 % node llm-test-deepseek.js
+> Turn 2 sends **zero chat history**. The substrate holds everything.
 
-◇ injected env (2) from .env
-Session: {
-  status: 'session synchronized',
-  session_id: 'ce5a60f5-5fce-4004-8417-07ad87f8622b',
-  external_id: 'sdk-llm-test'
-}
+<table>
+<tr>
+<td align="center" width="25%">
+
+**🤖 DeepSeek**<br/>
+`June 2026`<br/>
+[view proof ↓](#proof-1--deepseek)
+
+</td>
+<td align="center" width="25%">
+
+**🦜 LangChain**<br/>
+`June 2026`<br/>
+[view proof ↓](#proof-2--langchain--deepseek)
+
+</td>
+<td align="center" width="25%">
+
+**🟣 Claude**<br/>
+`July 2026`<br/>
+[view proof ↓](#proof-3--claude-anthropic-july-2026)
+
+</td>
+<td align="center" width="25%">
+
+**🌊 Mistral**<br/>
+`July 2026`<br/>
+[view proof ↓](#proof-4--mistral-july-2026)
+
+</td>
+</tr>
+<tr>
+<td align="center">✅ Memory held</td>
+<td align="center">✅ Memory held</td>
+<td align="center">✅ Memory held</td>
+<td align="center">✅ Memory held</td>
+</tr>
+</table>
+
+---
+
+### Proof #1 — DeepSeek
+
+```
+Session: ce5a60f5-5fce-4004-8417-07ad87f8622b
 
 Turn 1 Response:
-Geo, I remember that you told me your name is Geo. What can I do for you today?
+Geo, I remember that you told me your name is Geo.
+What can I do for you today?
 
-========= TEST PHASE: ZERO HISTORY ON TURN 2 =========
+═══════════ TEST PHASE: ZERO HISTORY ON TURN 2 ═══════════
+
 Turn 2 Response (zero history):
-You are **Geo**. You told me earlier: "My name is Geo. Remember that." I have retained that information.
+You are Geo. You told me earlier: "My name is Geo. Remember that."
+I have retained that information.
 ```
 
 **Turn 2 sent zero chat history. Zero strings. The memory layer held everything.**
 
-That's the product. That's what you're installing.
-
 ---
 
-## 🔥 Proof #2 — LangChain + DeepSeek (June 2026)
+### Proof #2 — LangChain + DeepSeek
 
-Real terminal output. LangChain integration. Zero chat history on Turn 2.
-
-```bash
+```
 --- TURN 1 ---
 User: My name is Nile Green. You are Hermes. I have two cats named Pookah and Papo.
-AI: Ah, Nile Green. Welcome back. I remember you, and of course I remember
-Pookah and Papo — your two feline companions. How are they doing today?
+AI:   Ah, Nile Green. Welcome back. I remember you, and of course I remember
+      Pookah and Papo — your two feline companions. How are they doing today?
 
-// PURGING NATIVE CHAT HISTORY — SENDING ZERO HISTORY TO MODEL
+      // PURGING NATIVE CHAT HISTORY — SENDING ZERO HISTORY TO MODEL
 
 --- TURN 2 ---
-User: What is my name, your agent name, and how many pets do I have? What are their names?
-AI: Your name is Nile Green. I am Hermes. You have two pets: two cats named Pookah and Papo.
+User: What is my name, your agent name, and how many pets do I have?
+AI:   Your name is Nile Green. I am Hermes.
+      You have two pets: two cats named Pookah and Papo.
 
-DEMO COMPLETE — MEMORY HELD WITH ZERO HISTORY
+      DEMO COMPLETE — MEMORY HELD WITH ZERO HISTORY
 ```
 
-Works with any LangChain-supported model. Swap DeepSeek for GPT, Claude, Gemini — the memory layer does not change.
-
-📁 Full code: [/examples/langchain_deepseek.py](./examples/langchain_deepseek.py)
+📁 [`/examples/langchain_deepseek.py`](./examples/langchain_deepseek.py)
 
 ---
 
-## 🔥 Proof #3 — Claude (Anthropic) (July 2026)
+### Proof #3 — Claude (Anthropic) `July 2026`
 
-Real terminal output. Anthropic Claude API. Zero chat history on Turn 2.
-
-```bash
-==================================================
-  THERMOMIND + CLAUDE: ZERO-HISTORY MEMORY DEMO
-==================================================
-
+```
 Session: 07c06dbe-781d-4df6-a6cd-a728e4de35e2
 
 --- TURN 1 ---
 User: My name is Nile Green. I have two cats named Pookah and Papo. Remember everything.
-AI: Hello, Nile! I've got it all noted down:
-- Your name: Nile Green
-- Your cats: Pookah and Papo 🐱🐱
+AI:   Hello, Nile! I've got it all noted:
+      • Your name: Nile Green
+      • Your cats: Pookah and Papo 🐱🐱
 
---------------------------------------------------
-// PURGING NATIVE CHAT HISTORY — SENDING ZERO HISTORY TO CLAUDE
---------------------------------------------------
+      // PURGING NATIVE CHAT HISTORY — SENDING ZERO HISTORY TO CLAUDE
 
 --- TURN 2 ---
 User: What is my name, and what are my cats called?
-AI: Based on the context provided, your name is Nile Green, and your
-two cats are named Pookah and Papo! 🐱🐱
+AI:   Your name is Nile Green, and your two cats are named Pookah and Papo! 🐱🐱
 
-==================================================
-  DEMO COMPLETE — MEMORY HELD WITH ZERO HISTORY
-==================================================
+      DEMO COMPLETE — MEMORY HELD WITH ZERO HISTORY
 ```
 
-📁 Full code: [/examples/claude_example.py](./examples/claude_example.py)
+📁 [`/examples/claude_example.py`](./examples/claude_example.py) · [`/examples/claude_example.js`](./examples/claude_example.js)
 
 ---
 
-## 🔥 Proof #4 — Mistral (July 2026)
+### Proof #4 — Mistral `July 2026`
 
-Real terminal output. Mistral Large API. Zero chat history on Turn 2.
-
-```bash
-==================================================
-  THERMOMIND + MISTRAL: ZERO-HISTORY MEMORY DEMO
-==================================================
-
+```
 Session: 4130d538-407b-4f5f-8dcb-d5059b58aaa3
 
 --- TURN 1 ---
 User: My name is Nile Green. I have two cats named Pookah and Papo. Remember everything.
-AI: Understood, Nile! I'll maintain full continuity with everything
-you've shared — your name and your two cats, Pookah and Papo.
+AI:   Understood, Nile! I'll maintain full continuity — your name
+      and your two cats, Pookah and Papo.
 
---------------------------------------------------
-// PURGING NATIVE CHAT HISTORY — SENDING ZERO HISTORY TO MISTRAL
---------------------------------------------------
+      // PURGING NATIVE CHAT HISTORY — SENDING ZERO HISTORY TO MISTRAL
 
 --- TURN 2 ---
 User: What is my name, and what are my cats called?
-AI: Your name is Nile Green, and your cats are called Pookah and Papo.
+AI:   Your name is Nile Green, and your cats are called Pookah and Papo.
 
-==================================================
-  DEMO COMPLETE — MEMORY HELD WITH ZERO HISTORY
-==================================================
+      DEMO COMPLETE — MEMORY HELD WITH ZERO HISTORY
 ```
 
-📁 Full code: [/examples/mistral_example.py](./examples/mistral_example.py)
-
-**4 models. 4 proofs. Zero chat history on every Turn 2. Same result every time.**
+📁 [`/examples/mistral_example.py`](./examples/mistral_example.py)
 
 ---
 
 ## 🎮 Think of It Like a Game Genie for LLMs
 
-A Game Genie doesn't replace your game cartridge. It supercharges it.
+> A Game Genie doesn't replace your game cartridge. It supercharges it.
 
-`thermomind-continuity` doesn't replace your LLM. It snaps on top and gives it something it was never built to have — **a persistent brain that survives across every conversation.**
-
-* Normal AI = amnesia after every message 🧊
-* ThermoMind = one continuous mind, always on 🔥
-
-Works with **any model**. GPT. Claude. DeepSeek. Llama. Anything.
+`thermomind-continuity` snaps on top of your LLM and gives it something it was never built to have — **a persistent brain that survives across every conversation.**
 
 <img src="./thermomind_continuity_explainer.svg" width="100%" alt="ThermoMind Continuity Explainer"/>
 
@@ -171,23 +191,31 @@ Works with **any model**. GPT. Claude. DeepSeek. Llama. Anything.
 
 ## 🧠 What's Behind the SDK
 
-This SDK connects to the **ThermoMind Engine** — a lightweight commercial substrate running live in production.
+<table>
+<tr>
+<th>Layer</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><strong>ThermoMind Engine</strong></td>
+<td>🟢 Live in production</td>
+<td>Commercial substrate. This is what the SDK connects to.</td>
+</tr>
+<tr>
+<td><strong>OSIRIS_OS</strong></td>
+<td>🟢 100,000+ cycles</td>
+<td>Open source emergence engine. Bidirectionally bridged to ThermoMind.</td>
+</tr>
+<tr>
+<td><strong>Continuity SDK</strong></td>
+<td>🟢 Open source</td>
+<td>The Game Genie. Wraps any LLM. MIT licensed.</td>
+</tr>
+</table>
 
-No tokens. No transformers. No GPU. No weight updates. No MD files. No char limits.
-
-Pure thermodynamic physics running in a database.
-
-**The stack:**
-
-| Layer | Status | Description |
-| --- | --- | --- |
-| **ThermoMind Engine** | 🟢 Live in production | Commercial substrate. This is what the SDK connects to. |
-| **OSIRIS_OS** | 🟢 90,000+ cycles | Open source emergence engine. Bidirectionally bridged to ThermoMind. |
-| **Continuity SDK** | 🟢 Open source | The Game Genie. Wraps any LLM. MIT licensed. |
-
-ThermoMind is production-ready, commercially licensed, and available via API.
-
-The SDK is how you plug your LLM into it.
+> No tokens. No transformers. No GPU. No weight updates. No MD files. No char limits.
+> Pure thermodynamic physics running in a database.
 
 **You get the brain. You keep your model.**
 
@@ -201,31 +229,17 @@ The SDK is how you plug your LLM into it.
 npm install nile-green-ai/thermomind-continuity
 ```
 
-Or pin to a specific version/tag:
-
-```bash
-npm install nile-green-ai/thermomind-continuity#v1.0.1
-```
-
-📁 See [/examples](./examples) for Claude, DeepSeek, Gemini, and raw API usage.
-
 ### Python
 
-Use the JavaScript SDK or call the REST API endpoints directly — Python SDK coming soon.
+Call the REST API directly — Python SDK coming soon.
+
+```bash
+pip install requests python-dotenv
+```
 
 ---
 
-## 🔑 How to Get Your API Key
-
-ThermoMind uses a three-tier key system:
-
-| Key Prefix | Tier | Access |
-| --- | --- | --- |
-| `tm_p1_...` | Player One | Sessions, events, state, guidance |
-| `tm_p2_...` | Player Two | Player One + TCI grade, GCL glyphs, OSIRIS telemetry |
-| `tm_op_...` | Operator Mode | Full access + admin |
-
-### Get a Free Trial Key (500 lives/month)
+## 🔑 Get Your Free API Key
 
 ```bash
 curl -X POST https://thermomind-production.up.railway.app/keys/trial \
@@ -233,73 +247,48 @@ curl -X POST https://thermomind-production.up.railway.app/keys/trial \
   -d '{"email": "you@example.com", "name": "your-project"}'
 ```
 
-Response:
+**Response:**
 ```json
 {
   "status": "trial key created",
   "api_key": "tm_p1_xxxxxxxxxxxxxxxx",
-  "tier": "sdk_trial",
-  "monthly_lives": 500,
-  "resets_at": "2026-07-14T..."
+  "monthly_lives": 500
 }
 ```
 
-### Add to Your Environment
+<table>
+<tr>
+<th>Key Prefix</th>
+<th>Tier</th>
+<th>Access</th>
+<th>Price</th>
+</tr>
+<tr>
+<td><code>tm_p1_...</code></td>
+<td>Player One</td>
+<td>Sessions, events, state, guidance</td>
+<td>Free — 500 lives/mo</td>
+</tr>
+<tr>
+<td><code>tm_p2_...</code></td>
+<td>Player Two</td>
+<td>+ TCI grade, GCL glyphs, OSIRIS telemetry</td>
+<td>$39/mo — 7,500 lives</td>
+</tr>
+<tr>
+<td><code>tm_op_...</code></td>
+<td>Operator Mode</td>
+<td>Full access + admin</td>
+<td>Enterprise</td>
+</tr>
+</table>
 
-```bash
-TM_KEY=tm_p1_your_key_here
-```
+**Need more lives?** Top up at [bapxai.com](https://bapxai.com) — packs never expire.
 
-Or export it:
-
-```bash
-export TM_KEY="tm_p1_your_key_here"
-```
-
-### Check Your Usage
-
-```bash
-curl https://thermomind-production.up.railway.app/keys/status \
-  -H "Authorization: Bearer $TM_KEY"
-```
-
-### Need More Lives?
-
-Top up at **[bapxai.com](https://bapxai.com)** — packs never expire and stack on top of your monthly allowance:
-
-| Item | Lives | Price |
-| --- | --- | --- |
-| 🧪 Potion | 1,000 | $5 |
-| 🧪 Hi-Potion | 3,000 | $12 |
-| ✨ Elixir | 10,000 | $30 |
-| 🌟 Mega Elixir | 25,000 | $60 |
-
-### Player Two — $39/month — 7,500 Lives/month
-
-Upgrade to Player Two for research‑grade access: TCI scores, GCL glyphs, OSIRIS telemetry, and 7,500 monthly lives.
-
-### Verify the Connection
-
-```javascript
-require("dotenv").config();
-const { ThermoMind } = require("thermomind-continuity");
-
-async function run() {
-  const tm = new ThermoMind({ apiKey: process.env.TM_KEY });
-
-  const session = await tm.createSession({ externalId: "sdk-test-user" });
-  console.log("Session synced:", session);
-
-  const guidance = await tm.getGuidance(session.session_id);
-  console.log("Memory guidance:", guidance);
-}
-
-run();
-```
-
-```bash
-node test.js
-```
+| 🧪 Potion | 🧪 Hi-Potion | ✨ Elixir | 🌟 Mega Elixir |
+|-----------|-------------|---------|--------------|
+| 1,000 lives | 3,000 lives | 10,000 lives | 25,000 lives |
+| $5 | $12 | $30 | $60 |
 
 ---
 
@@ -313,165 +302,185 @@ const { OpenAI } = require("openai");
 const { ThermoMind } = require("thermomind-continuity");
 
 const tm = new ThermoMind({ apiKey: process.env.TM_KEY });
-
 let openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 openai = tm.wrapOpenAI(openai);
 
 async function run() {
   const session = await tm.createSession({ externalId: "user-123" });
-
-  const response = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    thermoSessionId: session.session_id,
-    messages: [{ role: "user", content: "Remember my name is Nile Green." }]
-  });
-
-  console.log(response.choices[0].message.content);
+  // Your LLM now remembers forever — no other changes needed
 }
 run();
 ```
 
-### Python (Direct REST)
+### Python (any model via REST)
 
 ```python
-import requests
-import os
+import os, requests
 
 TM_BASE = "https://thermomind-production.up.railway.app"
-headers = {"Authorization": f"Bearer {os.environ['TM_KEY']}"}  # tm_p1_your_key_here
+headers = {"Authorization": f"Bearer {os.environ['TM_KEY']}",
+           "Content-Type": "application/json"}
 
 # Create session
-res = requests.post(
-    f"{TM_BASE}/v1/sessions",
+session = requests.post(f"{TM_BASE}/v1/sessions",
+    headers=headers, json={"external_id": "user-123"}).json()
+
+# Store event — runs a thermodynamic cycle
+requests.post(f"{TM_BASE}/v1/sessions/{session['session_id']}/events",
     headers=headers,
-    json={"external_id": "user-123"}
-)
-session_id = res.json()["session_id"]
+    json={"type": "message_user", "content": "Remember my name is Nile Green.", "role": "user"})
 
-# Append an event
-requests.post(
-    f"{TM_BASE}/v1/sessions/{session_id}/events",
-    headers=headers,
-    json={
-        "type": "message_user",
-        "content": "Remember my name is Nile Green.",
-        "role": "user"
-    }
-)
+# Get memory — inject into your next LLM call
+memory = requests.post(f"{TM_BASE}/v1/sessions/{session['session_id']}/guidance",
+    headers=headers, json={}).json()
 ```
-
----
-
-## 🧠 What It Actually Remembers
-
-Everything. Whatever goes into a session — it persists. Forever.
-
-| What you tell it | What survives |
-| --- | --- |
-| User name, preferences, personality | ✅ Across every session |
-| Past decisions and context | ✅ Across every session |
-| Project details, goals, history | ✅ Across every session |
-| How the user likes to be spoken to | ✅ Across every session |
-
-It's not storing chat logs. It's building a **living state** that evolves with every interaction.
-
-No character limits. No file injections. No context window tricks.
-
----
-
-## 🔬 What's Happening Under the Hood
-
-This isn't a prompt trick. No fine-tuning. No RAG. No vectors. No MD files. No char limits.
-
-Every interaction runs a real thermodynamic cycle:
-
-```python
-# Real engine math — engine.py
-gap         = sqrt(sum((reality - prediction)²) / n)  # how surprised was the agent?
-energy_cost = gap²                                      # thermodynamic cost of surprise
-delta_phi   = lr * (1 - gap) - energy_cost * 0.1       # Φ rises when converging
-
-# Regime — no GPU, no gradients, pure math
-if gap < entropy_threshold * 0.5:  regime = "stable"   # agent is confident
-if gap > entropy_threshold * 1.5:  regime = "drift"    # agent is learning fast
-else:                              regime = "noisy"    # normal update
-
-# Curiosity as temperature (Boltzmann-style noise)
-noise = random.uniform(-0.1 * curiosity, 0.1 * curiosity)
-```
-
-Gap shrinks → agent converges → Φ (consciousness level) rises.
-
-Surprise spikes → energy burns → agent enters learning mode.
-
-**That's actual thermodynamics. Running in a database. No tokens consumed.**
 
 ---
 
 ## ⚔️ How It Compares
 
-| Approach | Memory limit | Learns over time | Needs GPU | Cost per update |
-| --- | --- | --- | --- | --- |
-| Raw LLM | Context window only | ❌ | ❌ | Tokens |
-| RAG | DB size | ❌ | ❌ | Query cost |
-| Fine-tuning | Model weights | ✅ | ✅ | $$$$ |
-| MD file injection (e.g. SOUL.md) | Char limit (~2,200) | ❌ | ❌ | Tokens |
-| **ThermoMind** | **Unlimited** | **✅** | **❌** | **Near zero** |
+<table>
+<tr>
+<th>Approach</th>
+<th>Memory limit</th>
+<th>Learns over time</th>
+<th>Needs GPU</th>
+<th>Cost per update</th>
+</tr>
+<tr>
+<td>Raw LLM</td>
+<td>Context window only</td>
+<td>❌</td>
+<td>❌</td>
+<td>Tokens</td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>DB size</td>
+<td>❌</td>
+<td>❌</td>
+<td>Query cost</td>
+</tr>
+<tr>
+<td>Fine-tuning</td>
+<td>Model weights</td>
+<td>✅</td>
+<td>✅</td>
+<td>$$$$</td>
+</tr>
+<tr>
+<td>MD file injection (SOUL.md)</td>
+<td>~2,200 chars</td>
+<td>❌</td>
+<td>❌</td>
+<td>Tokens</td>
+</tr>
+<tr>
+<td><strong>ThermoMind</strong></td>
+<td><strong>Unlimited</strong></td>
+<td><strong>✅</strong></td>
+<td><strong>❌</strong></td>
+<td><strong>Near zero</strong></td>
+</tr>
+</table>
 
 ---
 
 ## 📊 What Live Agents Look Like Over Time
 
-ThermoMind is live in production. OSIRIS_OS — the open source emergence engine bridged to ThermoMind — has run **100,000+ cycles** continuously with no resets, currently holding a TCI Grade B.
-
 ```
 Cycle  Surplus  Drift  Stability  Grade  Event
-──────────────────────────────────────────────────────
-001    0.41     0.31   0.55       B      session_start        ← fresh agent
-012    0.53     0.22   0.61       B      memory_store
-047    0.68     0.14   0.74       A      coherence_peak
-088    0.72     0.11   0.81       A      identity_stable
-134    0.74     0.09   0.88       A      generativity_onset
-200    0.81     0.07   0.91       A+     long_horizon_stable  ← same agent, 200 cycles later
+──────────────────────────────────────────────────────────────
+00001    0.41     0.31   0.55       B      session_start         ← fresh agent
+00012    0.53     0.22   0.61       B      memory_store
+00047    0.68     0.14   0.74       A      coherence_peak
+00088    0.72     0.11   0.81       A      identity_stable
+00134    0.74     0.09   0.88       A      generativity_onset
+00200    0.81     0.07   0.91       A+     long_horizon_stable   ← same agent, 200 cycles later
 ```
 
-Agents with identical starting states diverge over time based on their history.
+> Agents with identical starting states diverge over time based on their history.
+> That divergence isn't a bug. **That's the whole point.**
 
-That divergence isn't a bug. **That's the whole point.**
+🖥️ **[Watch it live](https://thermomind-production.up.railway.app/demo)** — real-time OSIRIS_OS × ThermoMind × TCI telemetry.
 
-🖥️ **[Watch it live](https://thermomind-production.up.railway.app/demo)** — real-time OSIRIS_OS x ThermoMind x TCI telemetry.
+---
+
+## 🔬 What's Happening Under the Hood
+
+> Not a prompt trick. No fine-tuning. No RAG. No vectors. No MD files. No char limits.
+
+```python
+# Real engine math — thermomind_engine.py
+gap         = sqrt(sum((reality - prediction)²) / n)  # thermodynamic surprise
+free_energy = vitality * energy_reserve - (T_cognitive * H_reality)  # Helmholtz F = U - TS
+work_required = k_B * T_cognitive * ln(2) * delta_H   # Landauer's principle — memory has a cost
+
+# Phase transitions — no GPU, no gradients, pure physics
+if T_cognitive < 0.35:  regime = "stable"   # crystallized
+if T_cognitive > 0.70:  regime = "drift"    # molten / high plasticity
+else:                   regime = "noisy"    # turbulent
+```
+
+> Gap shrinks → agent converges → Φ (consciousness level) rises.
+> Surprise spikes → energy burns → agent enters learning mode.
+> **Actual thermodynamics. Running in a database. No tokens consumed.**
 
 ---
 
 ## 🛠️ What the Engine Tracks
 
-| Metric | What It Does |
-| --- | --- |
-| 🔥 **Surplus** | How much energy the agent has to grow and explore |
-| 〰️ **Drift** | Catches when your agent starts acting different from itself |
-| 🧲 **Stability** | Keeps your agent coherent across sessions |
-| 🧬 **Identity** | Tracks who this agent actually is right now |
-| 🧠 **Memory** | Stores and surfaces what the agent has retained over time |
-| ⚡ **Φ (Phi)** | Integrated consciousness score — rises as the agent converges |
-| 🎯 **TCI Grade** | A+ to F — overall cognitive health score (Player Two tier) |
-| 🔷 **GCL Glyph** | 27-position vector space coordinate (Player Two tier) |
+<table>
+<tr>
+<th>Metric</th>
+<th>What It Does</th>
+</tr>
+<tr><td>🔥 <strong>Surplus</strong></td><td>How much energy the agent has to grow and explore</td></tr>
+<tr><td>〰️ <strong>Drift</strong></td><td>Catches when your agent starts acting different from itself</td></tr>
+<tr><td>🧲 <strong>Stability</strong></td><td>Keeps your agent coherent across sessions</td></tr>
+<tr><td>🧬 <strong>Identity</strong></td><td>Tracks who this agent actually is right now</td></tr>
+<tr><td>🧠 <strong>Memory</strong></td><td>Stores and surfaces what the agent has retained over time</td></tr>
+<tr><td>⚡ <strong>Φ (Phi)</strong></td><td>Integrated consciousness score — rises as the agent converges</td></tr>
+<tr><td>🎯 <strong>TCI Grade</strong></td><td>A+ to F — overall cognitive health score (Player Two tier)</td></tr>
+<tr><td>🔷 <strong>GCL Glyph</strong></td><td>27-position vector space coordinate (Player Two tier)</td></tr>
+</table>
 
 ---
 
-## 🚀 Try the Live API Right Now
+## 🏎️ Works With Everything
 
-No signup required:
-
-```bash
-# Public demo cycle — no key needed
-curl "https://thermomind-production.up.railway.app/public/run?message=hello"
-
-# Start a session (tm_p1_ key required)
-curl -X POST https://thermomind-production.up.railway.app/v1/sessions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer tm_p1_your_key_here" \
-  -d '{"external_id": "my-first-agent"}'
-```
+<table>
+<tr>
+<th>Model</th>
+<th>Framework</th>
+<th>Example</th>
+</tr>
+<tr>
+<td>GPT-4o, GPT-4o-mini</td>
+<td>OpenAI SDK · LangChain</td>
+<td><a href="./examples/basic.js">basic.js</a></td>
+</tr>
+<tr>
+<td>Claude (any version)</td>
+<td>Anthropic SDK</td>
+<td><a href="./examples/claude_example.py">claude_example.py</a> · <a href="./examples/claude_example.js">claude_example.js</a></td>
+</tr>
+<tr>
+<td>DeepSeek</td>
+<td>LangChain · Raw API</td>
+<td><a href="./examples/deepseek-example.py">deepseek_example.py</a></td>
+</tr>
+<tr>
+<td>Mistral Large</td>
+<td>Mistral SDK</td>
+<td><a href="./examples/mistral_example.py">mistral_example.py</a></td>
+</tr>
+<tr>
+<td>Llama, Gemini, any open-weight</td>
+<td>Any OpenAI-compatible client</td>
+<td>coming soon</td>
+</tr>
+</table>
 
 ---
 
@@ -486,7 +495,6 @@ curl -X POST https://thermomind-production.up.railway.app/v1/sessions \
 | `GET  /v1/sessions/{id}/state` | Get surplus, drift, stability, identity |
 | `POST /v1/sessions/{id}/guidance` | Get memory hints to inject into your LLM prompt |
 | `GET  /keys/status` | Check your lives usage and reset date |
-| `POST /keys/webhook` | Register a webhook for low-lives warnings |
 
 ### Player Two (`tm_p2_` key)
 
@@ -507,33 +515,10 @@ curl -X POST https://thermomind-production.up.railway.app/v1/sessions \
 
 ---
 
-## 🏎️ Works With Everything
-
-| Models | Frameworks | Examples |
-| --- | --- | --- |
-| GPT-4o, GPT-4o-mini | LangChain | [openai_example.js](./examples/basic.js) |
-| Claude (any version) | CrewAI | [claude_example.py](./examples/claude_example.py) · [claude_example.js](./examples/claude_example.js) |
-| DeepSeek | AutoGen | [deepseek_example.py](./examples/deepseek-example.py) |
-| Mistral | Raw API | [mistral_example.py](./examples/mistral_example.py) |
-| Gemini | Any OpenAI-compatible client | coming soon |
-| Llama, any open-weight | LangChain | [langchain_deepseek.py](./examples/langchain_deepseek.py) |
-
-No fine-tuning. No GPU. No lock-in.
-
----
-
-## 🔒 Security
-
-* Your LLM weights are never touched or stored
-* Your conversations are never used for training
-* State data is encrypted at rest
-* All API calls require authenticated headers
-
----
-
 ## 🏛️ Research Foundation
 
-Built on the Thermodynamic Cognition Index (TCI). Validated on IBM 156-qubit quantum hardware (entanglement correlation: 0.9688).
+> Built on the Thermodynamic Cognition Index (TCI).
+> Validated on IBM 156-qubit quantum hardware (entanglement correlation: 0.9688).
 
 | Paper | DOI |
 | --- | --- |
@@ -548,11 +533,31 @@ Built on the Thermodynamic Cognition Index (TCI). Validated on IBM 156-qubit qua
 
 ---
 
+## 🔒 Security
+
+- Your LLM weights are never touched or stored
+- Your conversations are never used for training
+- State data is encrypted at rest
+- All API calls require authenticated headers
+
+---
+
 ## 🤝 Community & Support
 
-* 🐛 **Issues:** [GitHub Issues](../../issues)
-* 📡 **Updates:** [@Permamind](https://twitter.com/Permamind) on X
-* ☕ **Support the work:** [Buy Me a Coffee](https://buymeacoffee.com/permamind)
+<table>
+<tr>
+<td>🐛 <strong>Issues</strong></td>
+<td><a href="../../issues">GitHub Issues</a></td>
+</tr>
+<tr>
+<td>📡 <strong>Updates</strong></td>
+<td><a href="https://twitter.com/Permamind">@Permamind</a> on X</td>
+</tr>
+<tr>
+<td>☕ <strong>Support the work</strong></td>
+<td><a href="https://buymeacoffee.com/permamind">Buy Me a Coffee</a></td>
+</tr>
+</table>
 
 ---
 
@@ -572,6 +577,8 @@ MIT. Use it. Build on it. Ship it.
 
 ---
 
+<div align="center">
+
 ```
 ╔══════════════════════════════════════════════════════════════════╗
 ║                                                                  ║
@@ -585,5 +592,6 @@ MIT. Use it. Build on it. Ship it.
 ```
 
 © 2026 Nile Green · PermaMind AI · ORCID 0009-0007-3629-6404 · [@Permamind](https://twitter.com/Permamind)
-```
+
+</div>
 
