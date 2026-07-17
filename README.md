@@ -586,3 +586,4 @@ MIT. Use it. Build on it. Ship it.
 
 © 2026 Nile Green · PermaMind AI · ORCID 0009-0007-3629-6404 · [@Permamind](https://twitter.com/Permamind)
 ```
+
