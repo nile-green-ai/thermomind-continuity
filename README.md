@@ -84,6 +84,76 @@ Works with any LangChain-supported model. Swap DeepSeek for GPT, Claude, Gemini 
 
 ---
 
+## 🔥 Proof #3 — Claude (Anthropic) (July 2026)
+
+Real terminal output. Anthropic Claude API. Zero chat history on Turn 2.
+
+```bash
+==================================================
+  THERMOMIND + CLAUDE: ZERO-HISTORY MEMORY DEMO
+==================================================
+
+Session: 07c06dbe-781d-4df6-a6cd-a728e4de35e2
+
+--- TURN 1 ---
+User: My name is Nile Green. I have two cats named Pookah and Papo. Remember everything.
+AI: Hello, Nile! I've got it all noted down:
+- Your name: Nile Green
+- Your cats: Pookah and Papo 🐱🐱
+
+--------------------------------------------------
+// PURGING NATIVE CHAT HISTORY — SENDING ZERO HISTORY TO CLAUDE
+--------------------------------------------------
+
+--- TURN 2 ---
+User: What is my name, and what are my cats called?
+AI: Based on the context provided, your name is Nile Green, and your
+two cats are named Pookah and Papo! 🐱🐱
+
+==================================================
+  DEMO COMPLETE — MEMORY HELD WITH ZERO HISTORY
+==================================================
+```
+
+📁 Full code: [/examples/claude_example.py](./examples/claude_example.py)
+
+---
+
+## 🔥 Proof #4 — Mistral (July 2026)
+
+Real terminal output. Mistral Large API. Zero chat history on Turn 2.
+
+```bash
+==================================================
+  THERMOMIND + MISTRAL: ZERO-HISTORY MEMORY DEMO
+==================================================
+
+Session: 4130d538-407b-4f5f-8dcb-d5059b58aaa3
+
+--- TURN 1 ---
+User: My name is Nile Green. I have two cats named Pookah and Papo. Remember everything.
+AI: Understood, Nile! I'll maintain full continuity with everything
+you've shared — your name and your two cats, Pookah and Papo.
+
+--------------------------------------------------
+// PURGING NATIVE CHAT HISTORY — SENDING ZERO HISTORY TO MISTRAL
+--------------------------------------------------
+
+--- TURN 2 ---
+User: What is my name, and what are my cats called?
+AI: Your name is Nile Green, and your cats are called Pookah and Papo.
+
+==================================================
+  DEMO COMPLETE — MEMORY HELD WITH ZERO HISTORY
+==================================================
+```
+
+📁 Full code: [/examples/mistral_example.py](./examples/mistral_example.py)
+
+**4 models. 4 proofs. Zero chat history on every Turn 2. Same result every time.**
+
+---
+
 ## 🎮 Think of It Like a Game Genie for LLMs
 
 A Game Genie doesn't replace your game cartridge. It supercharges it.
@@ -352,7 +422,7 @@ Surprise spikes → energy burns → agent enters learning mode.
 
 ## 📊 What Live Agents Look Like Over Time
 
-ThermoMind is live in production. OSIRIS_OS — the open source emergence engine bridged to ThermoMind — has run 90,000+ cycles continuously with no resets, currently holding a TCI Grade B.
+ThermoMind is live in production. OSIRIS_OS — the open source emergence engine bridged to ThermoMind — has run **100,000+ cycles** continuously with no resets, currently holding a TCI Grade B.
 
 ```
 Cycle  Surplus  Drift  Stability  Grade  Event
@@ -439,13 +509,14 @@ curl -X POST https://thermomind-production.up.railway.app/v1/sessions \
 
 ## 🏎️ Works With Everything
 
-| Models | Frameworks |
-| --- | --- |
-| GPT-4o, GPT-4o-mini | LangChain |
-| Claude (any version) | CrewAI |
-| DeepSeek | AutoGen |
-| Gemini | Raw API |
-| Llama, Mistral, any open-weight | Any OpenAI-compatible client |
+| Models | Frameworks | Examples |
+| --- | --- | --- |
+| GPT-4o, GPT-4o-mini | LangChain | [openai_example.js](./examples/basic.js) |
+| Claude (any version) | CrewAI | [claude_example.py](./examples/claude_example.py) · [claude_example.js](./examples/claude_example.js) |
+| DeepSeek | AutoGen | [deepseek_example.py](./examples/deepseek-example.py) |
+| Mistral | Raw API | [mistral_example.py](./examples/mistral_example.py) |
+| Gemini | Any OpenAI-compatible client | coming soon |
+| Llama, any open-weight | LangChain | [langchain_deepseek.py](./examples/langchain_deepseek.py) |
 
 No fine-tuning. No GPU. No lock-in.
 
