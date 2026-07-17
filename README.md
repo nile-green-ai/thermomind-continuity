@@ -139,7 +139,7 @@ curl -X POST https://thermomind-production.up.railway.app/keys/trial \
   -H "Content-Type: application/json" \
   -d '{"email": "you@example.com", "name": "your-project"}'
 
-(Pricing table stays the same — it’s clear and fair) How It Compares(Your comparison table is excellent — I kept it unchanged) Live Agents Over Time(Your cycle table is great — kept as-is) Under the HoodThermoMind runs a lightweight, physics-inspired state engine that tracks surprise (prediction gap), energy dynamics, and memory salience. No fine-tuning. No vectors. No context bloat.It gives your LLM a persistent identity and memory layer that survives across conversations. What the Engine Tracks(Your metric table is strong — kept with minor wording tweaks for clarity) Works With Everything(Your compatibility table is perfect — left unchanged) API Reference(Your API tables are clean — kept) Security & ResearchLLM weights never touched
+Under the HoodThermoMind runs a lightweight, physics-inspired state engine that tracks surprise (prediction gap), energy dynamics, and memory salience. No fine-tuning. No vectors. No context bloat.It gives your LLM a persistent identity and memory layer that survives across conversations. What the Engine Track Works With Everything API Reference Security & Research LLM weights never touched
 Conversations never used for training
 State encrypted at rest
 
@@ -154,7 +154,7 @@ Built on the Thermodynamic Cognition Index (TCI) research. LicenseMIT. Use it. B
 ╚══════════════════════════════════════════════════════════════════╝
 
 © 2026 Nile Green · PermaMind AI · @Permamind
-</div>
+
 ```
 
 
