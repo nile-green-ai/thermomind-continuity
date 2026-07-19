@@ -28,22 +28,37 @@ Wrap your model in 2 lines. It stays continuous across sessions — no chat hist
 
 ## 15-second proof
 
+Wrap the LLM client you already use — this works with any model, not just one provider. Claude shown here via `wrapClaude`; OpenAI-compatible clients (GPT, DeepSeek, Mistral) work the same way via `wrapOpenAI`.
+
 Turn 2 sends **zero chat history**. The engine remembers anyway.
 
-```python
-from thermomind import Thermomind
+```javascript
+const Anthropic = require("@anthropic-ai/sdk");
+const { ThermoMind } = require("thermomind-continuity");
 
-client = Thermomind(api_key="tm_p1_...")
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const tm = new ThermoMind({ apiKey: "tm_p1_..." });
+const claude = tm.wrapClaude(anthropic);
 
-client.chat("My dog's name is Max.")
+await claude.messages.create({
+  model: "claude-sonnet-5",
+  max_tokens: 1000,
+  messages: [{ role: "user", content: "My dog's name is Max." }],
+  thermoSessionId: "my-session-id",
+});
 
-# --- new process, new session, no history passed in ---
+// --- new process, new session, no history passed in ---
 
-client.chat("What's my dog's name?")
-# → "Max."
+const response = await claude.messages.create({
+  model: "claude-sonnet-5",
+  max_tokens: 1000,
+  messages: [{ role: "user", content: "What's my dog's name?" }],
+  thermoSessionId: "my-session-id", // same ID = same continuity thread
+});
+// → "Max."
 ```
 
-That's it. No RAG, no vector DB, no fine-tuning, no context-window tricks.
+Same session ID across processes, zero chat history required — ThermoMind supplies the continuity, your model still generates the actual reply. No RAG, no vector DB, no fine-tuning, no context-window tricks.
 
 <video src="https://github.com/user-attachments/assets/ea40522d-c1d5-4aa6-bd5c-b9106b25fbc2"></video>
 
