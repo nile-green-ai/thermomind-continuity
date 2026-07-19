@@ -117,18 +117,27 @@ class ThermoMind {
     });
   }
 
+  // Anthropic message content can be a plain string or an array of content
+  // blocks ([{type: "text", text: "..."}, ...]) — normalize to a string.
+  static _extractText(content) {
+    if (typeof content === "string") return content;
+    if (Array.isArray(content)) {
+      const textBlock = content.find((b) => b.type === "text");
+      return textBlock ? textBlock.text : "";
+    }
+    return "";
+  }
+
   /**
-   * THE GAME GENIE ENGINE INTERCEPTOR
+   * THE GAME GENIE ENGINE INTERCEPTOR (OpenAI-shaped clients)
    * Connects stateless LLM frames to your stateful computing engine.
    *
-   * NOTE: this only works for clients that expose an OpenAI-shaped
-   * `chat.completions.create` method — i.e. the real OpenAI SDK, or any
-   * OpenAI-compatible endpoint (DeepSeek, Mistral via their OpenAI-compatible
-   * mode, etc). It does NOT work with the Anthropic SDK, whose client shape
-   * is different (`messages.create`, not `chat.completions.create`). There is
-   * currently no wrapClaude() — Claude integration requires manually calling
-   * getGuidance() and injecting it into your system prompt, as shown in the
-   * Python proof script, not this wrapper.
+   * Works for the real OpenAI SDK, or any OpenAI-compatible endpoint
+   * (DeepSeek, Mistral via their OpenAI-compatible mode, etc) — anything
+   * exposing `client.chat.completions.create(...)`. For Anthropic's SDK,
+   * use wrapClaude() instead — the client shapes are different enough
+   * (system prompt handling, content-block format, response shape) that
+   * they need separate wrappers rather than one shared implementation.
    */
   wrapOpenAI(openaiClient) {
     const tmInstance = this;
@@ -197,6 +206,86 @@ class ThermoMind {
     };
 
     return openaiClient;
+  }
+
+  /**
+   * THE GAME GENIE ENGINE INTERCEPTOR (Anthropic SDK)
+   * Same idea as wrapOpenAI, adapted for Anthropic's client shape:
+   *   - system prompt is a top-level `system` string param, not a
+   *     {role: "system"} message inside `messages`
+   *   - message content can be a string OR an array of content blocks
+   *   - the call is `client.messages.create(...)`, not
+   *     `client.chat.completions.create(...)`
+   *   - the response is `response.content` (an array of blocks), not
+   *     `response.choices[0].message.content`
+   */
+  wrapClaude(anthropicClient) {
+    const tmInstance = this;
+    const originalCreate = anthropicClient.messages.create.bind(anthropicClient.messages);
+
+    anthropicClient.messages.create = async function (params, options = {}) {
+      const sessionId = options.thermoSessionId || params.thermoSessionId;
+
+      if (!sessionId) {
+        const { thermoSessionId, ...cleanParams } = params;
+        return originalCreate(cleanParams, options);
+      }
+
+      const messages = params.messages || [];
+      const lastUserMsg = [...messages].reverse().find((m) => m.role === "user");
+      const userContent = lastUserMsg ? ThermoMind._extractText(lastUserMsg.content) : "";
+
+      if (userContent) {
+        tmInstance
+          .appendEvent(sessionId, {
+            type: "cycle_input",
+            content: userContent,
+            role: "user",
+          })
+          .catch((err) => console.warn("ThermoMind non-blocking telemetry log warning:", err.message));
+      }
+
+      let systemGuidance = "";
+      try {
+        const guidance = await tmInstance.getGuidance(sessionId, { context: userContent });
+        if (guidance && guidance.hints && guidance.hints.length > 0) {
+          systemGuidance = `\n[ThermoMind Stateful Identity & Continuity Context]:\n${guidance.hints.join("\n")}`;
+        }
+      } catch (err) {
+        console.warn("ThermoMind continuity fallback: Operating raw.", err.message);
+      }
+
+      const { thermoSessionId: p_id, ...cleanParams } = params;
+      const { thermoSessionId: o_id, ...cleanOptions } = options;
+
+      // Anthropic uses a top-level "system" string, not a message in the array.
+      if (systemGuidance) {
+        cleanParams.system = cleanParams.system
+          ? `${cleanParams.system}${systemGuidance}`
+          : systemGuidance.trim();
+      }
+
+      const response = await originalCreate(cleanParams, cleanOptions);
+
+      const assistantBlock = Array.isArray(response.content)
+        ? response.content.find((b) => b.type === "text")
+        : null;
+      const assistantReply = assistantBlock ? assistantBlock.text : null;
+
+      if (assistantReply) {
+        tmInstance
+          .appendEvent(sessionId, {
+            type: "cycle_output",
+            content: assistantReply,
+            role: "assistant",
+          })
+          .catch((err) => console.warn("ThermoMind loop closure warning:", err.message));
+      }
+
+      return response;
+    };
+
+    return anthropicClient;
   }
 }
 
