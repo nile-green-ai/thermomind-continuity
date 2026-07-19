@@ -7,153 +7,186 @@ info:
     identity fingerprinting, and long-term memory for LLM agents.
 
 servers:
-  - url: https://api.thermomind.ai/v1
+  - url: https://thermomind-production.up.railway.app
 
 components:
   securitySchemes:
     ApiKeyAuth:
       type: http
       scheme: bearer
-      bearerFormat: JWT
+      bearerFormat: >
+        Raw API key string (e.g. tm_p1_..., tm_p2_..., tm_eng_...) — not a JWT.
+        Pass it as: Authorization: Bearer <your_key>
 
   schemas:
     Session:
       type: object
       properties:
+        status:
+          type: string
+          description: "'session created' for a new session, 'session synchronized' if external_id already existed."
+          example: "session created"
         session_id:
           type: string
-        created_at:
+          format: uuid
+        external_id:
           type: string
-          format: date-time
+          nullable: true
 
     Event:
       type: object
-      required: [type, content, role]
+      required: [type]
       properties:
         type:
           type: string
+          example: "message"
         content:
           type: string
+          nullable: true
         role:
           type: string
-        timestamp:
-          type: string
-          format: date-time
-        tags:
-          type: array
-          items:
-            type: string
+          nullable: true
+          example: "user"
+        data:
+          type: object
+          nullable: true
 
     CycleUpdate:
       type: object
       properties:
-        cycle_id:
+        status:
           type: string
-        surplus:
+          example: "cycle_computed"
+        regime:
+          type: string
+          description: "'stable', 'drift', or 'noisy'"
+        prediction_gap:
           type: number
-        drift:
+        phi:
           type: number
-        stability:
-          type: number
-        state_version:
-          type: integer
+          description: "Consciousness/coherence metric (Φ), 0.0-1.0"
+        boredom:
+          type: boolean
+        mental_state:
+          type: string
 
     State:
       type: object
       properties:
         session_id:
           type: string
+        external_id:
+          type: string
+          nullable: true
+        cycle:
+          type: integer
+        phi:
+          type: number
+        grade:
+          type: string
+          description: "A+, A, B, C, or Initializing — derived from phi"
+        energy_reserve:
+          type: number
+        vitality:
+          type: number
         surplus:
           type: number
         drift:
           type: number
         stability:
           type: number
-        identity_fingerprint:
+        regime:
           type: string
-        last_cycle_id:
+        mental_state:
           type: string
-        cycles:
-          type: integer
-        uptime_seconds:
-          type: integer
+        boredom_flag:
+          type: boolean
+        traits:
+          type: object
+        self_model:
+          type: object
 
     MemoryWrite:
       type: object
-      required: [kind, content]
+      required: [content]
       properties:
         kind:
           type: string
+          default: "fact"
         content:
           type: string
         importance:
           type: number
-        source_cycle_id:
-          type: string
+          default: 0.5
 
-    MemoryItem:
+    MemoryWriteResponse:
       type: object
       properties:
-        id:
+        status:
           type: string
-        content:
+          example: "memory_stored"
+        kind:
           type: string
-        relevance:
+        importance:
           type: number
-        created_at:
-          type: string
-          format: date-time
 
     GuidanceRequest:
       type: object
       properties:
         context:
           type: string
+          default: ""
         max_hints:
           type: integer
+          default: 3
 
     GuidanceResponse:
       type: object
       properties:
+        session_id:
+          type: string
+        agent:
+          type: string
+        cycles:
+          type: integer
+        phi:
+          type: number
         surplus:
           type: number
         drift:
           type: number
         stability:
           type: number
+        regime:
+          type: string
+        boredom:
+          type: boolean
+        memory_ranked_by_salience:
+          type: boolean
         hints:
           type: array
           items:
             type: string
 
-    TimelinePoint:
+    ErrorResponse:
       type: object
       properties:
-        cycle_id:
+        detail:
           type: string
-        timestamp:
-          type: string
-          format: date-time
-        surplus:
-          type: number
-        drift:
-          type: number
-        stability:
-          type: number
 
 security:
   - ApiKeyAuth: []
 
 paths:
 
-  /sessions:
+  /v1/sessions:
     post:
-      summary: Create a new continuity session
+      summary: Create a new continuity session, or resume an existing one by external_id
       operationId: createSession
       security:
         - ApiKeyAuth: []
       requestBody:
-        required: true
+        required: false
         content:
           application/json:
             schema:
@@ -161,17 +194,42 @@ paths:
               properties:
                 external_id:
                   type: string
+                  nullable: true
+                  description: >
+                    Your own identifier for this session (e.g. a user ID or
+                    agent name). If a session with this external_id already
+                    exists under your API key, that session is returned
+                    instead of creating a new one.
                 metadata:
                   type: object
+                  nullable: true
       responses:
         '200':
-          description: Session created
+          description: Session created or synchronized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Session'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Monthly cycles and pack cycles both exhausted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: external_id already claimed by a different API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
-  /sessions/{session_id}/events:
+  /v1/sessions/{session_id}/events:
     post:
       summary: Append an event and trigger a continuity cycle update
       operationId: appendEvent
@@ -183,6 +241,7 @@ paths:
           required: true
           schema:
             type: string
+          description: Either the session_id returned from createSession, or the external_id you originally provided.
       requestBody:
         required: true
         content:
@@ -191,15 +250,21 @@ paths:
               $ref: '#/components/schemas/Event'
       responses:
         '200':
-          description: Cycle updated
+          description: Cycle computed
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CycleUpdate'
+        '404':
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
-  /sessions/{session_id}/state:
+  /v1/sessions/{session_id}/state:
     get:
-      summary: Get continuity metrics for the session
+      summary: Get current continuity metrics for the session
       operationId: getState
       security:
         - ApiKeyAuth: []
@@ -216,10 +281,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/State'
+        '404':
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
-  /sessions/{session_id}/memory:
+  /v1/sessions/{session_id}/memory:
     post:
-      summary: Write a memory item
+      summary: Write a memory item directly (outside the normal event/cycle flow)
       operationId: writeMemory
       security:
         - ApiKeyAuth: []
@@ -241,48 +312,17 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  memory_id:
-                    type: string
-                  status:
-                    type: string
-
-    get:
-      summary: Query memory items
-      operationId: queryMemory
-      security:
-        - ApiKeyAuth: []
-      parameters:
-        - name: session_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: query
-          in: query
-          schema:
-            type: string
-        - name: limit
-          in: query
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Memory items
+                $ref: '#/components/schemas/MemoryWriteResponse'
+        '404':
+          description: Session not found
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  items:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/MemoryItem'
+                $ref: '#/components/schemas/ErrorResponse'
 
-  /sessions/{session_id}/guidance:
+  /v1/sessions/{session_id}/guidance:
     post:
-      summary: Generate continuity-aware guidance for LLM prompting
+      summary: Generate continuity-aware guidance hints for LLM prompting
       operationId: getGuidance
       security:
         - ApiKeyAuth: []
@@ -293,6 +333,7 @@ paths:
           schema:
             type: string
       requestBody:
+        required: false
         content:
           application/json:
             schema:
@@ -304,33 +345,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GuidanceResponse'
-
-  /sessions/{session_id}/timeline:
-    get:
-      summary: Retrieve historical continuity metrics
-      operationId: getTimeline
-      security:
-        - ApiKeyAuth: []
-      parameters:
-        - name: session_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: limit
-          in: query
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Timeline points
+        '404':
+          description: Session not found
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  points:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/TimelinePoint'
-
+                $ref: '#/components/schemas/ErrorResponse'
