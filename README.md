@@ -187,6 +187,90 @@ MIT. Use it, build on it, ship it.
 </tr>
 </table>
 
+### Proof 1 — DeepSeek
+
+```
+==================================================
+  THERMOMIND + DEEPSEEK: ZERO-HISTORY MEMORY DEMO
+==================================================
+
+Session: e91d69e2-3dc8-4c56-b005-cb8bff86b80b
+
+--- TURN 1 ---
+User: My name is Nile Green. Remember that.
+AI: Nice to meet you again, Nile Green. I've noted your name and will remember it throughout our conversation. How can I help you today?
+
+--------------------------------------------------
+// PURGING NATIVE CHAT HISTORY — SENDING ZERO HISTORY
+--------------------------------------------------
+
+--- TURN 2 ---
+User: What is my name?
+AI: Your name is Nile Green.
+
+==================================================
+  DEMO COMPLETE — MEMORY HELD WITH ZERO HISTORY
+==================================================
+```
+
+*(Note: this demo runs DeepSeek via LangChain under the hood, so it also stands in for proof-2. A raw DeepSeek-API-only transcript, without LangChain in the loop, can replace this if a fully separate proof-2 is needed.)*
+
+### Proof 3 — Claude (Anthropic), July 2026
+
+```
+==================================================
+  THERMOMIND + CLAUDE: ZERO-HISTORY MEMORY DEMO
+==================================================
+
+Session: 07c06dbe-781d-4df6-a6cd-a728e4de35e2
+
+--- TURN 1 ---
+User: My name is Nile Green. I have two cats named Pookah and Papo. Remember everything.
+AI: Hello, Nile! I've got it all noted down:
+
+- Your name: Nile Green
+- Your cats: Pookah and Papo 🐱🐱
+
+I'll maintain continuity with this throughout our conversation. Is there anything you'd like to talk about or that I can help you with today?
+
+--------------------------------------------------
+// PURGING NATIVE CHAT HISTORY — SENDING ZERO HISTORY TO CLAUDE
+--------------------------------------------------
+
+--- TURN 2 ---
+User: What is my name, and what are my cats called?
+AI: Based on the context provided, your name is Nile Green, and your two cats are named Pookah and Papo! 🐱🐱
+
+==================================================
+  DEMO COMPLETE — MEMORY HELD WITH ZERO HISTORY
+==================================================
+```
+
+### Proof 4 — Mistral, July 2026
+
+```
+==================================================
+  THERMOMIND + MISTRAL: ZERO-HISTORY MEMORY DEMO
+==================================================
+
+Session: 4130d538-407b-4f5f-8dcb-d5059b58aaa3
+
+--- TURN 1 ---
+User: My name is Nile Green. I have two cats named Pookah and Papo. Remember everything.
+AI: Understood, Nile! I'll maintain full continuity with everything you've shared—your name and your two cats, Pookah and Papo. How are you and your feline companions doing today? Any adventures or mischief to report? 😊
+
+--------------------------------------------------
+// PURGING NATIVE CHAT HISTORY — SENDING ZERO HISTORY TO MISTRAL
+--------------------------------------------------
+
+--- TURN 2 ---
+User: What is my name, and what are my cats called?
+AI: Your name is Nile Green, and your cats are called Pookah and Papo. 😊
+
+==================================================
+  DEMO COMPLETE — MEMORY HELD WITH ZERO HISTORY
+==================================================
+```
 
 ---
 
@@ -206,4 +290,3 @@ MIT. Use it, build on it, ship it.
 © 2026 Nile Green · PermaMind AI · [@Permamind](https://twitter.com/Permamind) · [bapxai.com](https://bapxai.com)
 
 </div>
-
